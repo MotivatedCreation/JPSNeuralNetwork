@@ -1,0 +1,803 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AB64044E1EC4BC8E00FCA969 /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB64044D1EC4BC8E00FCA969 /* libCorePlot-CocoaTouch.a */; };
+		AB6404501EC4BDB300FCA969 /* CorePlot.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AB64044B1EC4BC6600FCA969 /* CorePlot.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		AB6C44031E93C84D000DAF9E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C44021E93C84D000DAF9E /* AppDelegate.swift */; };
+		AB6C44051E93C84D000DAF9E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C44041E93C84D000DAF9E /* ViewController.swift */; };
+		AB6C44081E93C84D000DAF9E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB6C44061E93C84D000DAF9E /* Main.storyboard */; };
+		AB6C440A1E93C84D000DAF9E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB6C44091E93C84D000DAF9E /* Assets.xcassets */; };
+		AB6C440D1E93C84D000DAF9E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB6C440B1E93C84D000DAF9E /* LaunchScreen.storyboard */; };
+		AB6C44181E93C84D000DAF9E /* JPSNeuralNetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C44171E93C84D000DAF9E /* JPSNeuralNetworkTests.swift */; };
+		AB6C44231E93C84D000DAF9E /* JPSNeuralNetworkUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C44221E93C84D000DAF9E /* JPSNeuralNetworkUITests.swift */; };
+		AB6C44311E93C872000DAF9E /* JPSNeuralNetworkNeuron.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C44301E93C872000DAF9E /* JPSNeuralNetworkNeuron.swift */; };
+		AB6C44341E93C8B9000DAF9E /* JPSNeuralNetworkLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C44331E93C8B9000DAF9E /* JPSNeuralNetworkLayer.swift */; };
+		AB6C44361E93C8C5000DAF9E /* JPSNeuralNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C44351E93C8C5000DAF9E /* JPSNeuralNetwork.swift */; };
+		AB7884621EB21C24007CD9B0 /* JPSBinaryDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7884611EB21C24007CD9B0 /* JPSBinaryDataLoader.swift */; };
+		AB7884721EB3C836007CD9B0 /* train-labels.idx1-ubyte in Resources */ = {isa = PBXBuildFile; fileRef = AB7884711EB3C836007CD9B0 /* train-labels.idx1-ubyte */; };
+		AB7884741EB3C840007CD9B0 /* train-images.idx3-ubyte in Resources */ = {isa = PBXBuildFile; fileRef = AB7884731EB3C840007CD9B0 /* train-images.idx3-ubyte */; };
+		AB7884761EBA3AF7007CD9B0 /* JPSMNISTDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7884751EBA3AF7007CD9B0 /* JPSMNISTDataLoader.swift */; };
+		ABF025E51EC4B8D300B0302E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABF025E41EC4B8D300B0302E /* QuartzCore.framework */; };
+		ABF025E71EC4B8D600B0302E /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABF025E61EC4B8D600B0302E /* Accelerate.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AB6C44141E93C84D000DAF9E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AB6C43F71E93C84D000DAF9E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AB6C43FE1E93C84D000DAF9E;
+			remoteInfo = "Convolutional-Neural-Network";
+		};
+		AB6C441F1E93C84D000DAF9E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AB6C43F71E93C84D000DAF9E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AB6C43FE1E93C84D000DAF9E;
+			remoteInfo = "Convolutional-Neural-Network";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		AB6404511EC4BDB300FCA969 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				AB6404501EC4BDB300FCA969 /* CorePlot.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		AB64044B1EC4BC6600FCA969 /* CorePlot.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CorePlot.framework; sourceTree = "<group>"; };
+		AB64044D1EC4BC8E00FCA969 /* libCorePlot-CocoaTouch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libCorePlot-CocoaTouch.a"; sourceTree = "<group>"; };
+		AB6C43FF1E93C84D000DAF9E /* JPSNeuralNetwork.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JPSNeuralNetwork.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB6C44021E93C84D000DAF9E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AB6C44041E93C84D000DAF9E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		AB6C44071E93C84D000DAF9E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		AB6C44091E93C84D000DAF9E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AB6C440C1E93C84D000DAF9E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		AB6C440E1E93C84D000DAF9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AB6C44131E93C84D000DAF9E /* JPSNeuralNetworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JPSNeuralNetworkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB6C44171E93C84D000DAF9E /* JPSNeuralNetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JPSNeuralNetworkTests.swift; sourceTree = "<group>"; };
+		AB6C44191E93C84D000DAF9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AB6C441E1E93C84D000DAF9E /* JPSNeuralNetworkUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JPSNeuralNetworkUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB6C44221E93C84D000DAF9E /* JPSNeuralNetworkUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JPSNeuralNetworkUITests.swift; sourceTree = "<group>"; };
+		AB6C44241E93C84D000DAF9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AB6C44301E93C872000DAF9E /* JPSNeuralNetworkNeuron.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JPSNeuralNetworkNeuron.swift; sourceTree = "<group>"; };
+		AB6C44331E93C8B9000DAF9E /* JPSNeuralNetworkLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JPSNeuralNetworkLayer.swift; sourceTree = "<group>"; };
+		AB6C44351E93C8C5000DAF9E /* JPSNeuralNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JPSNeuralNetwork.swift; sourceTree = "<group>"; };
+		AB7884611EB21C24007CD9B0 /* JPSBinaryDataLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JPSBinaryDataLoader.swift; sourceTree = "<group>"; };
+		AB7884711EB3C836007CD9B0 /* train-labels.idx1-ubyte */ = {isa = PBXFileReference; lastKnownFileType = file; path = "train-labels.idx1-ubyte"; sourceTree = "<group>"; };
+		AB7884731EB3C840007CD9B0 /* train-images.idx3-ubyte */ = {isa = PBXFileReference; lastKnownFileType = file; path = "train-images.idx3-ubyte"; sourceTree = "<group>"; };
+		AB7884751EBA3AF7007CD9B0 /* JPSMNISTDataLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JPSMNISTDataLoader.swift; sourceTree = "<group>"; };
+		ABF025E41EC4B8D300B0302E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		ABF025E61EC4B8D600B0302E /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		ABF025F01EC4BA7D00B0302E /* CorePlot-CocoaTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CorePlot-CocoaTouch.h"; sourceTree = "<group>"; };
+		ABF025F11EC4BA7D00B0302E /* CPTAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTAnimation.h; sourceTree = "<group>"; };
+		ABF025F21EC4BA7D00B0302E /* CPTAnimationOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTAnimationOperation.h; sourceTree = "<group>"; };
+		ABF025F31EC4BA7D00B0302E /* CPTAnimationPeriod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTAnimationPeriod.h; sourceTree = "<group>"; };
+		ABF025F41EC4BA7D00B0302E /* CPTAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTAnnotation.h; sourceTree = "<group>"; };
+		ABF025F51EC4BA7D00B0302E /* CPTAnnotationHostLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTAnnotationHostLayer.h; sourceTree = "<group>"; };
+		ABF025F61EC4BA7D00B0302E /* CPTAxis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTAxis.h; sourceTree = "<group>"; };
+		ABF025F71EC4BA7D00B0302E /* CPTAxisLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTAxisLabel.h; sourceTree = "<group>"; };
+		ABF025F81EC4BA7D00B0302E /* CPTAxisLabelGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTAxisLabelGroup.h; sourceTree = "<group>"; };
+		ABF025F91EC4BA7D00B0302E /* CPTAxisSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTAxisSet.h; sourceTree = "<group>"; };
+		ABF025FA1EC4BA7D00B0302E /* CPTAxisTitle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTAxisTitle.h; sourceTree = "<group>"; };
+		ABF025FB1EC4BA7D00B0302E /* CPTBarPlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTBarPlot.h; sourceTree = "<group>"; };
+		ABF025FC1EC4BA7D00B0302E /* CPTBorderedLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTBorderedLayer.h; sourceTree = "<group>"; };
+		ABF025FD1EC4BA7D00B0302E /* CPTCalendarFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTCalendarFormatter.h; sourceTree = "<group>"; };
+		ABF025FE1EC4BA7D00B0302E /* CPTColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTColor.h; sourceTree = "<group>"; };
+		ABF025FF1EC4BA7D00B0302E /* CPTColorSpace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTColorSpace.h; sourceTree = "<group>"; };
+		ABF026001EC4BA7D00B0302E /* CPTConstraints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTConstraints.h; sourceTree = "<group>"; };
+		ABF026011EC4BA7D00B0302E /* CPTDataSourceTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTDataSourceTestCase.h; sourceTree = "<group>"; };
+		ABF026021EC4BA7D00B0302E /* CPTDebugQuickLook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTDebugQuickLook.h; sourceTree = "<group>"; };
+		ABF026031EC4BA7D00B0302E /* CPTDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTDefinitions.h; sourceTree = "<group>"; };
+		ABF026041EC4BA7D00B0302E /* CPTDerivedXYGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTDerivedXYGraph.h; sourceTree = "<group>"; };
+		ABF026051EC4BA7D00B0302E /* CPTExceptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTExceptions.h; sourceTree = "<group>"; };
+		ABF026061EC4BA7D00B0302E /* CPTFill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTFill.h; sourceTree = "<group>"; };
+		ABF026071EC4BA7D00B0302E /* CPTFunctionDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTFunctionDataSource.h; sourceTree = "<group>"; };
+		ABF026081EC4BA7D00B0302E /* CPTGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTGradient.h; sourceTree = "<group>"; };
+		ABF026091EC4BA7D00B0302E /* CPTGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTGraph.h; sourceTree = "<group>"; };
+		ABF0260A1EC4BA7D00B0302E /* CPTGraphHostingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTGraphHostingView.h; sourceTree = "<group>"; };
+		ABF0260B1EC4BA7D00B0302E /* CPTGridLineGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTGridLineGroup.h; sourceTree = "<group>"; };
+		ABF0260C1EC4BA7D00B0302E /* CPTGridLines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTGridLines.h; sourceTree = "<group>"; };
+		ABF0260D1EC4BA7D00B0302E /* CPTImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTImage.h; sourceTree = "<group>"; };
+		ABF0260E1EC4BA7D00B0302E /* CPTLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTLayer.h; sourceTree = "<group>"; };
+		ABF0260F1EC4BA7D00B0302E /* CPTLayerAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTLayerAnnotation.h; sourceTree = "<group>"; };
+		ABF026101EC4BA7D00B0302E /* CPTLegend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTLegend.h; sourceTree = "<group>"; };
+		ABF026111EC4BA7D00B0302E /* CPTLegendEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTLegendEntry.h; sourceTree = "<group>"; };
+		ABF026121EC4BA7D00B0302E /* CPTLimitBand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTLimitBand.h; sourceTree = "<group>"; };
+		ABF026131EC4BA7D00B0302E /* CPTLineCap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTLineCap.h; sourceTree = "<group>"; };
+		ABF026141EC4BA7D00B0302E /* CPTLineStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTLineStyle.h; sourceTree = "<group>"; };
+		ABF026151EC4BA7D00B0302E /* CPTMutableLineStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTMutableLineStyle.h; sourceTree = "<group>"; };
+		ABF026161EC4BA7D00B0302E /* CPTMutableNumericData+TypeConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CPTMutableNumericData+TypeConversion.h"; sourceTree = "<group>"; };
+		ABF026171EC4BA7D00B0302E /* CPTMutableNumericData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTMutableNumericData.h; sourceTree = "<group>"; };
+		ABF026181EC4BA7D00B0302E /* CPTMutablePlotRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTMutablePlotRange.h; sourceTree = "<group>"; };
+		ABF026191EC4BA7D00B0302E /* CPTMutableShadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTMutableShadow.h; sourceTree = "<group>"; };
+		ABF0261A1EC4BA7D00B0302E /* CPTMutableTextStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTMutableTextStyle.h; sourceTree = "<group>"; };
+		ABF0261B1EC4BA7D00B0302E /* CPTNumericData+TypeConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CPTNumericData+TypeConversion.h"; sourceTree = "<group>"; };
+		ABF0261C1EC4BA7D00B0302E /* CPTNumericData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTNumericData.h; sourceTree = "<group>"; };
+		ABF0261D1EC4BA7D00B0302E /* CPTNumericDataType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTNumericDataType.h; sourceTree = "<group>"; };
+		ABF0261E1EC4BA7D00B0302E /* CPTPathExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTPathExtensions.h; sourceTree = "<group>"; };
+		ABF0261F1EC4BA7D00B0302E /* CPTPieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTPieChart.h; sourceTree = "<group>"; };
+		ABF026201EC4BA7D00B0302E /* CPTPlatformSpecificCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTPlatformSpecificCategories.h; sourceTree = "<group>"; };
+		ABF026211EC4BA7D00B0302E /* CPTPlatformSpecificDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTPlatformSpecificDefines.h; sourceTree = "<group>"; };
+		ABF026221EC4BA7D00B0302E /* CPTPlatformSpecificFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTPlatformSpecificFunctions.h; sourceTree = "<group>"; };
+		ABF026231EC4BA7D00B0302E /* CPTPlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTPlot.h; sourceTree = "<group>"; };
+		ABF026241EC4BA7D00B0302E /* CPTPlotArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTPlotArea.h; sourceTree = "<group>"; };
+		ABF026251EC4BA7D00B0302E /* CPTPlotAreaFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTPlotAreaFrame.h; sourceTree = "<group>"; };
+		ABF026261EC4BA7D00B0302E /* CPTPlotGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTPlotGroup.h; sourceTree = "<group>"; };
+		ABF026271EC4BA7D00B0302E /* CPTPlotRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTPlotRange.h; sourceTree = "<group>"; };
+		ABF026281EC4BA7D00B0302E /* CPTPlotSpace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTPlotSpace.h; sourceTree = "<group>"; };
+		ABF026291EC4BA7D00B0302E /* CPTPlotSpaceAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTPlotSpaceAnnotation.h; sourceTree = "<group>"; };
+		ABF0262A1EC4BA7D00B0302E /* CPTPlotSymbol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTPlotSymbol.h; sourceTree = "<group>"; };
+		ABF0262B1EC4BA7D00B0302E /* CPTRangePlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTRangePlot.h; sourceTree = "<group>"; };
+		ABF0262C1EC4BA7D00B0302E /* CPTResponder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTResponder.h; sourceTree = "<group>"; };
+		ABF0262D1EC4BA7D00B0302E /* CPTScatterPlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTScatterPlot.h; sourceTree = "<group>"; };
+		ABF0262E1EC4BA7D00B0302E /* CPTShadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTShadow.h; sourceTree = "<group>"; };
+		ABF0262F1EC4BA7D00B0302E /* CPTTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTTestCase.h; sourceTree = "<group>"; };
+		ABF026301EC4BA7D00B0302E /* CPTTextLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTTextLayer.h; sourceTree = "<group>"; };
+		ABF026311EC4BA7D00B0302E /* CPTTextStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTTextStyle.h; sourceTree = "<group>"; };
+		ABF026321EC4BA7D00B0302E /* CPTTextStylePlatformSpecific.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTTextStylePlatformSpecific.h; sourceTree = "<group>"; };
+		ABF026331EC4BA7D00B0302E /* CPTTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTTheme.h; sourceTree = "<group>"; };
+		ABF026341EC4BA7D00B0302E /* CPTTimeFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTTimeFormatter.h; sourceTree = "<group>"; };
+		ABF026351EC4BA7D00B0302E /* CPTTradingRangePlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTTradingRangePlot.h; sourceTree = "<group>"; };
+		ABF026361EC4BA7D00B0302E /* CPTUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTUtilities.h; sourceTree = "<group>"; };
+		ABF026371EC4BA7D00B0302E /* CPTXYAxis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTXYAxis.h; sourceTree = "<group>"; };
+		ABF026381EC4BA7D00B0302E /* CPTXYAxisSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTXYAxisSet.h; sourceTree = "<group>"; };
+		ABF026391EC4BA7D00B0302E /* CPTXYGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTXYGraph.h; sourceTree = "<group>"; };
+		ABF0263A1EC4BA7D00B0302E /* CPTXYPlotSpace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTXYPlotSpace.h; sourceTree = "<group>"; };
+		ABF0263B1EC4BA7D00B0302E /* mainpage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mainpage.h; sourceTree = "<group>"; };
+		ABF0263C1EC4BA7D00B0302E /* NSCoderExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCoderExtensions.h; sourceTree = "<group>"; };
+		ABF0263D1EC4BA7D00B0302E /* NSDecimalNumberExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDecimalNumberExtensions.h; sourceTree = "<group>"; };
+		ABF0263E1EC4BA7D00B0302E /* NSNumberExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNumberExtensions.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AB6C43FC1E93C84D000DAF9E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABF025E71EC4B8D600B0302E /* Accelerate.framework in Frameworks */,
+				ABF025E51EC4B8D300B0302E /* QuartzCore.framework in Frameworks */,
+				AB64044E1EC4BC8E00FCA969 /* libCorePlot-CocoaTouch.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AB6C44101E93C84D000DAF9E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AB6C441B1E93C84D000DAF9E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AB6C43F61E93C84D000DAF9E = {
+			isa = PBXGroup;
+			children = (
+				AB6C44011E93C84D000DAF9E /* JPSNeuralNetwork */,
+				AB6C44161E93C84D000DAF9E /* JPSNeuralNetworkTests */,
+				AB6C44211E93C84D000DAF9E /* JPSNeuralNetworkUITests */,
+				AB6C44001E93C84D000DAF9E /* Products */,
+				ABF025E31EC4B8D200B0302E /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		AB6C44001E93C84D000DAF9E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AB6C43FF1E93C84D000DAF9E /* JPSNeuralNetwork.app */,
+				AB6C44131E93C84D000DAF9E /* JPSNeuralNetworkTests.xctest */,
+				AB6C441E1E93C84D000DAF9E /* JPSNeuralNetworkUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AB6C44011E93C84D000DAF9E /* JPSNeuralNetwork */ = {
+			isa = PBXGroup;
+			children = (
+				AB6C440B1E93C84D000DAF9E /* LaunchScreen.storyboard */,
+				AB6C44061E93C84D000DAF9E /* Main.storyboard */,
+				AB6C44091E93C84D000DAF9E /* Assets.xcassets */,
+				AB6C44021E93C84D000DAF9E /* AppDelegate.swift */,
+				AB6C44041E93C84D000DAF9E /* ViewController.swift */,
+				AB6C44321E93C8AA000DAF9E /* Neural Network */,
+				AB6C440E1E93C84D000DAF9E /* Info.plist */,
+				AB7884711EB3C836007CD9B0 /* train-labels.idx1-ubyte */,
+				AB7884731EB3C840007CD9B0 /* train-images.idx3-ubyte */,
+			);
+			path = JPSNeuralNetwork;
+			sourceTree = "<group>";
+		};
+		AB6C44161E93C84D000DAF9E /* JPSNeuralNetworkTests */ = {
+			isa = PBXGroup;
+			children = (
+				AB6C44171E93C84D000DAF9E /* JPSNeuralNetworkTests.swift */,
+				AB6C44191E93C84D000DAF9E /* Info.plist */,
+			);
+			path = JPSNeuralNetworkTests;
+			sourceTree = "<group>";
+		};
+		AB6C44211E93C84D000DAF9E /* JPSNeuralNetworkUITests */ = {
+			isa = PBXGroup;
+			children = (
+				AB6C44221E93C84D000DAF9E /* JPSNeuralNetworkUITests.swift */,
+				AB6C44241E93C84D000DAF9E /* Info.plist */,
+			);
+			path = JPSNeuralNetworkUITests;
+			sourceTree = "<group>";
+		};
+		AB6C44321E93C8AA000DAF9E /* Neural Network */ = {
+			isa = PBXGroup;
+			children = (
+				AB6C44351E93C8C5000DAF9E /* JPSNeuralNetwork.swift */,
+				AB6C44331E93C8B9000DAF9E /* JPSNeuralNetworkLayer.swift */,
+				AB6C44301E93C872000DAF9E /* JPSNeuralNetworkNeuron.swift */,
+				AB7884611EB21C24007CD9B0 /* JPSBinaryDataLoader.swift */,
+				AB7884751EBA3AF7007CD9B0 /* JPSMNISTDataLoader.swift */,
+			);
+			name = "Neural Network";
+			sourceTree = "<group>";
+		};
+		ABF025E31EC4B8D200B0302E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ABF025EF1EC4BA7D00B0302E /* CorePlotHeaders */,
+				AB64044D1EC4BC8E00FCA969 /* libCorePlot-CocoaTouch.a */,
+				AB64044B1EC4BC6600FCA969 /* CorePlot.framework */,
+				ABF025E61EC4B8D600B0302E /* Accelerate.framework */,
+				ABF025E41EC4B8D300B0302E /* QuartzCore.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		ABF025EF1EC4BA7D00B0302E /* CorePlotHeaders */ = {
+			isa = PBXGroup;
+			children = (
+				ABF025F01EC4BA7D00B0302E /* CorePlot-CocoaTouch.h */,
+				ABF025F11EC4BA7D00B0302E /* CPTAnimation.h */,
+				ABF025F21EC4BA7D00B0302E /* CPTAnimationOperation.h */,
+				ABF025F31EC4BA7D00B0302E /* CPTAnimationPeriod.h */,
+				ABF025F41EC4BA7D00B0302E /* CPTAnnotation.h */,
+				ABF025F51EC4BA7D00B0302E /* CPTAnnotationHostLayer.h */,
+				ABF025F61EC4BA7D00B0302E /* CPTAxis.h */,
+				ABF025F71EC4BA7D00B0302E /* CPTAxisLabel.h */,
+				ABF025F81EC4BA7D00B0302E /* CPTAxisLabelGroup.h */,
+				ABF025F91EC4BA7D00B0302E /* CPTAxisSet.h */,
+				ABF025FA1EC4BA7D00B0302E /* CPTAxisTitle.h */,
+				ABF025FB1EC4BA7D00B0302E /* CPTBarPlot.h */,
+				ABF025FC1EC4BA7D00B0302E /* CPTBorderedLayer.h */,
+				ABF025FD1EC4BA7D00B0302E /* CPTCalendarFormatter.h */,
+				ABF025FE1EC4BA7D00B0302E /* CPTColor.h */,
+				ABF025FF1EC4BA7D00B0302E /* CPTColorSpace.h */,
+				ABF026001EC4BA7D00B0302E /* CPTConstraints.h */,
+				ABF026011EC4BA7D00B0302E /* CPTDataSourceTestCase.h */,
+				ABF026021EC4BA7D00B0302E /* CPTDebugQuickLook.h */,
+				ABF026031EC4BA7D00B0302E /* CPTDefinitions.h */,
+				ABF026041EC4BA7D00B0302E /* CPTDerivedXYGraph.h */,
+				ABF026051EC4BA7D00B0302E /* CPTExceptions.h */,
+				ABF026061EC4BA7D00B0302E /* CPTFill.h */,
+				ABF026071EC4BA7D00B0302E /* CPTFunctionDataSource.h */,
+				ABF026081EC4BA7D00B0302E /* CPTGradient.h */,
+				ABF026091EC4BA7D00B0302E /* CPTGraph.h */,
+				ABF0260A1EC4BA7D00B0302E /* CPTGraphHostingView.h */,
+				ABF0260B1EC4BA7D00B0302E /* CPTGridLineGroup.h */,
+				ABF0260C1EC4BA7D00B0302E /* CPTGridLines.h */,
+				ABF0260D1EC4BA7D00B0302E /* CPTImage.h */,
+				ABF0260E1EC4BA7D00B0302E /* CPTLayer.h */,
+				ABF0260F1EC4BA7D00B0302E /* CPTLayerAnnotation.h */,
+				ABF026101EC4BA7D00B0302E /* CPTLegend.h */,
+				ABF026111EC4BA7D00B0302E /* CPTLegendEntry.h */,
+				ABF026121EC4BA7D00B0302E /* CPTLimitBand.h */,
+				ABF026131EC4BA7D00B0302E /* CPTLineCap.h */,
+				ABF026141EC4BA7D00B0302E /* CPTLineStyle.h */,
+				ABF026151EC4BA7D00B0302E /* CPTMutableLineStyle.h */,
+				ABF026161EC4BA7D00B0302E /* CPTMutableNumericData+TypeConversion.h */,
+				ABF026171EC4BA7D00B0302E /* CPTMutableNumericData.h */,
+				ABF026181EC4BA7D00B0302E /* CPTMutablePlotRange.h */,
+				ABF026191EC4BA7D00B0302E /* CPTMutableShadow.h */,
+				ABF0261A1EC4BA7D00B0302E /* CPTMutableTextStyle.h */,
+				ABF0261B1EC4BA7D00B0302E /* CPTNumericData+TypeConversion.h */,
+				ABF0261C1EC4BA7D00B0302E /* CPTNumericData.h */,
+				ABF0261D1EC4BA7D00B0302E /* CPTNumericDataType.h */,
+				ABF0261E1EC4BA7D00B0302E /* CPTPathExtensions.h */,
+				ABF0261F1EC4BA7D00B0302E /* CPTPieChart.h */,
+				ABF026201EC4BA7D00B0302E /* CPTPlatformSpecificCategories.h */,
+				ABF026211EC4BA7D00B0302E /* CPTPlatformSpecificDefines.h */,
+				ABF026221EC4BA7D00B0302E /* CPTPlatformSpecificFunctions.h */,
+				ABF026231EC4BA7D00B0302E /* CPTPlot.h */,
+				ABF026241EC4BA7D00B0302E /* CPTPlotArea.h */,
+				ABF026251EC4BA7D00B0302E /* CPTPlotAreaFrame.h */,
+				ABF026261EC4BA7D00B0302E /* CPTPlotGroup.h */,
+				ABF026271EC4BA7D00B0302E /* CPTPlotRange.h */,
+				ABF026281EC4BA7D00B0302E /* CPTPlotSpace.h */,
+				ABF026291EC4BA7D00B0302E /* CPTPlotSpaceAnnotation.h */,
+				ABF0262A1EC4BA7D00B0302E /* CPTPlotSymbol.h */,
+				ABF0262B1EC4BA7D00B0302E /* CPTRangePlot.h */,
+				ABF0262C1EC4BA7D00B0302E /* CPTResponder.h */,
+				ABF0262D1EC4BA7D00B0302E /* CPTScatterPlot.h */,
+				ABF0262E1EC4BA7D00B0302E /* CPTShadow.h */,
+				ABF0262F1EC4BA7D00B0302E /* CPTTestCase.h */,
+				ABF026301EC4BA7D00B0302E /* CPTTextLayer.h */,
+				ABF026311EC4BA7D00B0302E /* CPTTextStyle.h */,
+				ABF026321EC4BA7D00B0302E /* CPTTextStylePlatformSpecific.h */,
+				ABF026331EC4BA7D00B0302E /* CPTTheme.h */,
+				ABF026341EC4BA7D00B0302E /* CPTTimeFormatter.h */,
+				ABF026351EC4BA7D00B0302E /* CPTTradingRangePlot.h */,
+				ABF026361EC4BA7D00B0302E /* CPTUtilities.h */,
+				ABF026371EC4BA7D00B0302E /* CPTXYAxis.h */,
+				ABF026381EC4BA7D00B0302E /* CPTXYAxisSet.h */,
+				ABF026391EC4BA7D00B0302E /* CPTXYGraph.h */,
+				ABF0263A1EC4BA7D00B0302E /* CPTXYPlotSpace.h */,
+				ABF0263B1EC4BA7D00B0302E /* mainpage.h */,
+				ABF0263C1EC4BA7D00B0302E /* NSCoderExtensions.h */,
+				ABF0263D1EC4BA7D00B0302E /* NSDecimalNumberExtensions.h */,
+				ABF0263E1EC4BA7D00B0302E /* NSNumberExtensions.h */,
+			);
+			path = CorePlotHeaders;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AB6C43FE1E93C84D000DAF9E /* JPSNeuralNetwork */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AB6C44271E93C84D000DAF9E /* Build configuration list for PBXNativeTarget "JPSNeuralNetwork" */;
+			buildPhases = (
+				AB6C43FB1E93C84D000DAF9E /* Sources */,
+				AB6C43FC1E93C84D000DAF9E /* Frameworks */,
+				AB6C43FD1E93C84D000DAF9E /* Resources */,
+				AB6404511EC4BDB300FCA969 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JPSNeuralNetwork;
+			productName = "Convolutional-Neural-Network";
+			productReference = AB6C43FF1E93C84D000DAF9E /* JPSNeuralNetwork.app */;
+			productType = "com.apple.product-type.application";
+		};
+		AB6C44121E93C84D000DAF9E /* JPSNeuralNetworkTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AB6C442A1E93C84D000DAF9E /* Build configuration list for PBXNativeTarget "JPSNeuralNetworkTests" */;
+			buildPhases = (
+				AB6C440F1E93C84D000DAF9E /* Sources */,
+				AB6C44101E93C84D000DAF9E /* Frameworks */,
+				AB6C44111E93C84D000DAF9E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AB6C44151E93C84D000DAF9E /* PBXTargetDependency */,
+			);
+			name = JPSNeuralNetworkTests;
+			productName = "Convolutional-Neural-NetworkTests";
+			productReference = AB6C44131E93C84D000DAF9E /* JPSNeuralNetworkTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		AB6C441D1E93C84D000DAF9E /* JPSNeuralNetworkUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AB6C442D1E93C84D000DAF9E /* Build configuration list for PBXNativeTarget "JPSNeuralNetworkUITests" */;
+			buildPhases = (
+				AB6C441A1E93C84D000DAF9E /* Sources */,
+				AB6C441B1E93C84D000DAF9E /* Frameworks */,
+				AB6C441C1E93C84D000DAF9E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AB6C44201E93C84D000DAF9E /* PBXTargetDependency */,
+			);
+			name = JPSNeuralNetworkUITests;
+			productName = "Convolutional-Neural-NetworkUITests";
+			productReference = AB6C441E1E93C84D000DAF9E /* JPSNeuralNetworkUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AB6C43F71E93C84D000DAF9E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = "Jonathan Sullivan";
+				TargetAttributes = {
+					AB6C43FE1E93C84D000DAF9E = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = H95WDK6QG2;
+						ProvisioningStyle = Automatic;
+					};
+					AB6C44121E93C84D000DAF9E = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = H95WDK6QG2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = AB6C43FE1E93C84D000DAF9E;
+					};
+					AB6C441D1E93C84D000DAF9E = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = H95WDK6QG2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = AB6C43FE1E93C84D000DAF9E;
+					};
+				};
+			};
+			buildConfigurationList = AB6C43FA1E93C84D000DAF9E /* Build configuration list for PBXProject "JPSNeuralNetwork" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				English,
+			);
+			mainGroup = AB6C43F61E93C84D000DAF9E;
+			productRefGroup = AB6C44001E93C84D000DAF9E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AB6C43FE1E93C84D000DAF9E /* JPSNeuralNetwork */,
+				AB6C44121E93C84D000DAF9E /* JPSNeuralNetworkTests */,
+				AB6C441D1E93C84D000DAF9E /* JPSNeuralNetworkUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AB6C43FD1E93C84D000DAF9E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB6C440D1E93C84D000DAF9E /* LaunchScreen.storyboard in Resources */,
+				AB6C440A1E93C84D000DAF9E /* Assets.xcassets in Resources */,
+				AB6C44081E93C84D000DAF9E /* Main.storyboard in Resources */,
+				AB7884741EB3C840007CD9B0 /* train-images.idx3-ubyte in Resources */,
+				AB7884721EB3C836007CD9B0 /* train-labels.idx1-ubyte in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AB6C44111E93C84D000DAF9E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AB6C441C1E93C84D000DAF9E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AB6C43FB1E93C84D000DAF9E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB6C44361E93C8C5000DAF9E /* JPSNeuralNetwork.swift in Sources */,
+				AB7884761EBA3AF7007CD9B0 /* JPSMNISTDataLoader.swift in Sources */,
+				AB6C44311E93C872000DAF9E /* JPSNeuralNetworkNeuron.swift in Sources */,
+				AB7884621EB21C24007CD9B0 /* JPSBinaryDataLoader.swift in Sources */,
+				AB6C44051E93C84D000DAF9E /* ViewController.swift in Sources */,
+				AB6C44031E93C84D000DAF9E /* AppDelegate.swift in Sources */,
+				AB6C44341E93C8B9000DAF9E /* JPSNeuralNetworkLayer.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AB6C440F1E93C84D000DAF9E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB6C44181E93C84D000DAF9E /* JPSNeuralNetworkTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AB6C441A1E93C84D000DAF9E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB6C44231E93C84D000DAF9E /* JPSNeuralNetworkUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AB6C44151E93C84D000DAF9E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AB6C43FE1E93C84D000DAF9E /* JPSNeuralNetwork */;
+			targetProxy = AB6C44141E93C84D000DAF9E /* PBXContainerItemProxy */;
+		};
+		AB6C44201E93C84D000DAF9E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AB6C43FE1E93C84D000DAF9E /* JPSNeuralNetwork */;
+			targetProxy = AB6C441F1E93C84D000DAF9E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		AB6C44061E93C84D000DAF9E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AB6C44071E93C84D000DAF9E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		AB6C440B1E93C84D000DAF9E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AB6C440C1E93C84D000DAF9E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		AB6C44251E93C84D000DAF9E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AB6C44261E93C84D000DAF9E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AB6C44281E93C84D000DAF9E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = H95WDK6QG2;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				HEADER_SEARCH_PATHS = /Users/Jonathan/Documents/JPSNeuralNetwork;
+				INFOPLIST_FILE = JPSNeuralNetwork/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Jonathan-Sullivan.JPSNeuralNetwork";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		AB6C44291E93C84D000DAF9E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = H95WDK6QG2;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				HEADER_SEARCH_PATHS = /Users/Jonathan/Documents/JPSNeuralNetwork;
+				INFOPLIST_FILE = JPSNeuralNetwork/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Jonathan-Sullivan.JPSNeuralNetwork";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		AB6C442B1E93C84D000DAF9E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = H95WDK6QG2;
+				INFOPLIST_FILE = JPSNeuralNetworkTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Jonathan-Sullivan.JPSNeuralNetworkTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JPSNeuralNetwork.app/JPSNeuralNetwork";
+			};
+			name = Debug;
+		};
+		AB6C442C1E93C84D000DAF9E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = H95WDK6QG2;
+				INFOPLIST_FILE = JPSNeuralNetworkTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Jonathan-Sullivan.JPSNeuralNetworkTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JPSNeuralNetwork.app/JPSNeuralNetwork";
+			};
+			name = Release;
+		};
+		AB6C442E1E93C84D000DAF9E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = H95WDK6QG2;
+				INFOPLIST_FILE = JPSNeuralNetworkUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Jonathan-Sullivan.JPSNeuralNetworkUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = JPSNeuralNetwork;
+			};
+			name = Debug;
+		};
+		AB6C442F1E93C84D000DAF9E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = H95WDK6QG2;
+				INFOPLIST_FILE = JPSNeuralNetworkUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Jonathan-Sullivan.JPSNeuralNetworkUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = JPSNeuralNetwork;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AB6C43FA1E93C84D000DAF9E /* Build configuration list for PBXProject "JPSNeuralNetwork" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB6C44251E93C84D000DAF9E /* Debug */,
+				AB6C44261E93C84D000DAF9E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AB6C44271E93C84D000DAF9E /* Build configuration list for PBXNativeTarget "JPSNeuralNetwork" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB6C44281E93C84D000DAF9E /* Debug */,
+				AB6C44291E93C84D000DAF9E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AB6C442A1E93C84D000DAF9E /* Build configuration list for PBXNativeTarget "JPSNeuralNetworkTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB6C442B1E93C84D000DAF9E /* Debug */,
+				AB6C442C1E93C84D000DAF9E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AB6C442D1E93C84D000DAF9E /* Build configuration list for PBXNativeTarget "JPSNeuralNetworkUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB6C442E1E93C84D000DAF9E /* Debug */,
+				AB6C442F1E93C84D000DAF9E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AB6C43F71E93C84D000DAF9E /* Project object */;
+}
