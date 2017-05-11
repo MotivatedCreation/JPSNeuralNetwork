@@ -12,19 +12,25 @@ import CorePlot
 
 class ViewController: UIViewController
 {
-    @IBOutlet weak var mainImageView: UIImageView!
-    @IBOutlet weak var tempImageView: UIImageView!
-    @IBOutlet weak var predictionLabel: UILabel!
-    @IBOutlet weak var currentCostLabel: UILabel!
-    @IBOutlet weak var currentEpochLabel: UILabel!
     @IBOutlet weak var progressLabel: UILabel!
-    @IBOutlet weak var overallProgressLabel: UILabel!
+    @IBOutlet weak var predictionLabel: UILabel!
+    @IBOutlet weak var elapsedTimeLabel: UILabel!
+    @IBOutlet weak var currentCostLabel: UILabel!
+    @IBOutlet weak var tempImageView: UIImageView!
+    @IBOutlet weak var currentEpochLabel: UILabel!
     @IBOutlet weak var progressView: UIProgressView!
+    @IBOutlet weak var overallProgressLabel: UILabel!
     @IBOutlet weak var overallProgressView: UIProgressView!
     
+    var startTime: TimeInterval?
+    
     let epochs = 10000
+    let topology = [2, 3, 1]
     let learningRate: Scalar = 0.4
     let activationFunction = JPSNeuralNetworkActivationFunction.sigmoid
+    
+    let targetOutputs: Matrix = [[0], [1], [1], [0]]
+    let inputs: Matrix = [[0, 0], [1, 0], [0, 1], [1, 1]]
     
     var network: JPSNeuralNetwork?
     
@@ -44,9 +50,6 @@ class ViewController: UIViewController
     var opacity: CGFloat = 1.0
     var swiped = false
     
-    let inputs: Matrix = [[0, 0], [1, 0], [0, 1], [1, 1]]
-    let targetOutputs: Matrix = [[0], [1], [1], [0]]
-    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -60,15 +63,9 @@ class ViewController: UIViewController
             }
             catch { print(error) }
             
-            let start = Date.timeIntervalSinceReferenceDate
+            self.startTime = Date.timeIntervalSinceReferenceDate
             
-            let topology = [2, 3, 1]
-            
-            let _ = JPSNeuralNetwork.train(delegate: self, topology: topology, epochs: self.epochs, learningRate: self.learningRate, activationFunction: .sigmoid, costFunction: .meanSquared, trainingInputs: self.inputs, targetOutputs: self.targetOutputs)
-            
-            let end = Date.timeIntervalSinceReferenceDate
-            
-            print((end - start).truncatingRemainder(dividingBy: 60))
+            let _ = JPSNeuralNetwork.train(delegate: self, topology: self.topology, epochs: self.epochs, learningRate: self.learningRate, activationFunction: .sigmoid, costFunction: .meanSquared, trainingInputs: self.inputs, targetOutputs: self.targetOutputs)
         }
     }
     
@@ -204,6 +201,11 @@ extension ViewController: JPSNeuralNetworkDelegate
             self.currentCostLabel.textColor = (self.currentCost > self.previousCost ?  UIColor.red :  UIColor(red: 0, green: (230.0 / 255.0), blue: 0, alpha: 1))
             
             self.currentEpochLabel.text = "Epoch: \(self.currentEpoch)"
+            
+            let endTime = Date.timeIntervalSinceReferenceDate
+            let elapsedTime = (endTime - self.startTime!).truncatingRemainder(dividingBy: 60)
+            
+            self.elapsedTimeLabel.text = "Elapsed Time: \(elapsedTime.stringFromTimeInterval())"
         }
     }
     
@@ -252,6 +254,21 @@ extension ViewController: CPTScatterPlotDataSource
         }
         
         return number
+    }
+}
+
+public extension TimeInterval
+{
+    func stringFromTimeInterval() -> NSString
+    {
+        let timeInterval = NSInteger(self)
+        
+        let milliseconds = Int(self.truncatingRemainder(dividingBy: 1) * 1000)
+        let seconds = timeInterval % 60
+        let minutes = (timeInterval / 60) % 60
+        let hours = (timeInterval / 3600)
+        
+        return NSString(format: "%0.2d:%0.2d:%0.2d.%0.3d", hours, minutes, seconds, milliseconds)
     }
 }
 
