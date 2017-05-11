@@ -24,8 +24,8 @@ class ViewController: UIViewController
     
     var startTime: TimeInterval?
     
-    let epochs = 10000
-    let topology = [2, 3, 1]
+    let epochs = 50
+    let topology = [784, 20, 10]
     let learningRate: Scalar = 0.4
     let activationFunction = JPSNeuralNetworkActivationFunction.sigmoid
     
@@ -65,7 +65,7 @@ class ViewController: UIViewController
             
             self.startTime = Date.timeIntervalSinceReferenceDate
             
-            let _ = JPSNeuralNetwork.train(delegate: self, topology: self.topology, epochs: self.epochs, learningRate: self.learningRate, activationFunction: .sigmoid, costFunction: .meanSquared, trainingInputs: self.inputs, targetOutputs: self.targetOutputs)
+            self.weights = JPSNeuralNetwork.train(delegate: self, topology: self.topology, epochs: self.epochs, learningRate: self.learningRate, activationFunction: .sigmoid, costFunction: .meanSquared, trainingInputs: self.trainingData!.images, targetOutputs: self.trainingData!.labels)
         }
     }
     
@@ -201,11 +201,6 @@ extension ViewController: JPSNeuralNetworkDelegate
             self.currentCostLabel.textColor = (self.currentCost > self.previousCost ?  UIColor.red :  UIColor(red: 0, green: (230.0 / 255.0), blue: 0, alpha: 1))
             
             self.currentEpochLabel.text = "Epoch: \(self.currentEpoch)"
-            
-            let endTime = Date.timeIntervalSinceReferenceDate
-            let elapsedTime = (endTime - self.startTime!).truncatingRemainder(dividingBy: 60)
-            
-            self.elapsedTimeLabel.text = "Elapsed Time: \(elapsedTime.stringFromTimeInterval())"
         }
     }
     
@@ -224,6 +219,11 @@ extension ViewController: JPSNeuralNetworkDelegate
         {
             self.overallProgressView.progress = progress
             self.overallProgressLabel.text = "\(progress * 100) %"
+            
+            let endTime = Date.timeIntervalSinceReferenceDate
+            let elapsedTime = (endTime - self.startTime!)
+            
+            self.elapsedTimeLabel.text = "Elapsed Time: \(elapsedTime.stringFromTimeInterval())"
         }
     }
 }
@@ -262,61 +262,18 @@ public extension TimeInterval
     func stringFromTimeInterval() -> NSString
     {
         let timeInterval = NSInteger(self)
-        
-        let milliseconds = Int(self.truncatingRemainder(dividingBy: 1) * 1000)
-        let seconds = timeInterval % 60
+
+        let seconds = (timeInterval % 60)
         let minutes = (timeInterval / 60) % 60
         let hours = (timeInterval / 3600)
         
-        return NSString(format: "%0.2d:%0.2d:%0.2d.%0.3d", hours, minutes, seconds, milliseconds)
+        return NSString(format: "%0.2d:%0.2d:%0.2d", hours, minutes, seconds)
     }
 }
 
 public extension UIImage
 {
-    func mono() -> UIImage
-    {
-        var image = self
-        
-        var inputImage = CIImage(image: image)
-        let options:[String : AnyObject] = [CIDetectorImageOrientation: (1 as AnyObject)]
-        let filters = inputImage!.autoAdjustmentFilters(options: options)
-        
-        for filter: CIFilter in filters
-        {
-            filter.setValue(inputImage, forKey: kCIInputImageKey)
-            inputImage = filter.outputImage
-        }
-        
-        let context = CIContext(options: nil)
-        let cgImage = context.createCGImage(inputImage!, from: inputImage!.extent)
-        image = UIImage(cgImage: cgImage!)
-        
-        let currentFilter = CIFilter(name: "CIPhotoEffectMono")
-        currentFilter!.setValue(CIImage(image: UIImage(cgImage: cgImage!)), forKey: kCIInputImageKey)
-        
-        let output = currentFilter!.outputImage
-        let cgimg = context.createCGImage(output!, from: output!.extent)
-        let processedImage = UIImage(cgImage: cgimg!)
-        image = processedImage
-        
-        return image
-    }
-    
-    public func normalize() -> UIImage
-    {
-        let width = 28
-        let height = 28
-        
-        UIGraphicsBeginImageContext(CGSize(width: width, height: height))
-        self.draw(in: CGRect(x: 0, y: 0, width: width, height: height))
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        return newImage!
-    }
-    
-    func getPixelColor(pos: CGPoint) -> Float
+    public func getPixelColor(pos: CGPoint) -> Float
     {
         let pixelData = self.cgImage!.dataProvider!.data
         let data: UnsafePointer<UInt8> = CFDataGetBytePtr(pixelData)
@@ -344,8 +301,6 @@ public extension UIImage
                 result.append(self.getPixelColor(pos: CGPoint(x: x, y: y)))
             }
         }
-        
-        print(result)
         
         return result
     }
