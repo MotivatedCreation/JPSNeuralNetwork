@@ -13,6 +13,8 @@ class LiveTrainingViewController: UIViewController
     @IBOutlet weak var predictionLabel: UILabel!
     @IBOutlet weak var tempImageView: UIImageView!
     
+    var neuralNetwork: JPSNeuralNetwork?
+    
     var lastPoint = CGPoint.zero
     var red: CGFloat = 0.0
     var green: CGFloat = 0.0
@@ -20,6 +22,14 @@ class LiveTrainingViewController: UIViewController
     var brushWidth: CGFloat = 1.0
     var opacity: CGFloat = 1.0
     var swiped = false
+    
+    public func prediction() -> Scalar
+    {
+        let inputs = self.tempImageView.image!.pixelColors()
+        let outputs = self.neuralNetwork!.feedForward(inputs: inputs)
+        
+        return Scalar(outputs.max()!)
+    }
     
     func drawLineFrom(fromPoint: CGPoint, toPoint: CGPoint)
     {
@@ -68,6 +78,8 @@ class LiveTrainingViewController: UIViewController
         if !swiped {
             self.drawLineFrom(fromPoint: self.lastPoint, toPoint: self.lastPoint)
         }
+        
+        //self.predictionLabel.text = "Predication: \(self.prediction())"
         
         self.tempImageView.image = nil
     }

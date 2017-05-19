@@ -34,7 +34,7 @@ class TrainingViewController: UIViewController
     var neuralNetwork: JPSNeuralNetwork?
     
     var epochs = 10
-    let architecture = [2, 3, 1]
+    let architecture = [784, 20, 10]
     var learningRate: Scalar = 0.4
     let costFunction = JPSNeuralNetworkCostFunction.meanSquared
     let activationFunctions: [JPSNeuralNetworkActivationFunction] = [.sigmoid, .hyperbolicTangent]
@@ -88,13 +88,8 @@ class TrainingViewController: UIViewController
 
             self.startTime = Date.timeIntervalSinceReferenceDate
             
-            self.weights = self.neuralNetwork!.train(epochs: self.epochs, costFunction: self.costFunction, learningRate: self.learningRate, trainingInputs: self.inputs, targetOutputs: self.labels)
-            //self.testNetwork()
-            
-            print(self.neuralNetwork!.feedForward(inputs: self.inputs[0]))
-            print(self.neuralNetwork!.feedForward(inputs: self.inputs[1]))
-            print(self.neuralNetwork!.feedForward(inputs: self.inputs[2]))
-            print(self.neuralNetwork!.feedForward(inputs: self.inputs[3]))
+            self.weights = self.neuralNetwork!.train(epochs: self.epochs, costFunction: self.costFunction, learningRate: self.learningRate, trainingInputs: self.trainingData!.images, targetOutputs: self.trainingData!.labels)
+            self.testNetwork()
             
             DispatchQueue.main.async {
                 self.postTrainingUIUpdate()
@@ -137,11 +132,16 @@ class TrainingViewController: UIViewController
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
-        if (segue.identifier == costGraphViewControllerSegueIdentifier)
+        if (segue.identifier == self.costGraphViewControllerSegueIdentifier)
         {
             let viewController = (segue.destination as! CostGraphViewController)
             viewController.epochs = self.epochs
             viewController.costs = self.costs
+        }
+        else if (segue.identifier == self.liveTrainingViewControllerSegueIdentifier)
+        {
+            let viewController = (segue.destination as! LiveTrainingViewController)
+            viewController.neuralNetwork = self.neuralNetwork
         }
     }
     

@@ -217,9 +217,6 @@ public class JPSNeuralNetwork
     private func update(weights: Matrix, learningRate: Scalar, gradient: Matrix, inputs: Matrix) -> Matrix
     {
         return zip(zip(inputs, weights), gradient).map({ layerInputsAndWeights, layerGradient in
-            print(layerInputsAndWeights.1.count)
-            print(layerInputsAndWeights.0.count)
-            print(layerGradient.count)
             return JPSNeuralNetworkLayer.update(weights: layerInputsAndWeights.1, learningRate: learningRate, gradient: layerGradient, inputs: layerInputsAndWeights.0)
         })
     }
