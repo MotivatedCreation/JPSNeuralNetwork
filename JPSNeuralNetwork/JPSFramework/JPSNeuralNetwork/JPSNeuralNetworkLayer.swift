@@ -15,15 +15,24 @@ public class JPSNeuralNetworkLayer
      */
     public class func randomWeights(neuronCount: Int, inputCount: Int) -> Vector
     {
-        var layerWeights = Vector()
+        let layerWeights = (0..<neuronCount).map({ _ in
+            return JPSNeuralNetworkNeuron.randomWeights(inputCount: inputCount)
+        })
+
+        return Vector(layerWeights.joined())
+    }
+    
+    public class func weightedInputs(neuronCount: Int, activationFunction: JPSNeuralNetworkActivationFunction, inputs: Vector, weights: Vector) -> Vector
+    {
+        var weightedInputs = Vector(repeating: 0, count: neuronCount)
         
-        for _ in 0..<neuronCount
-        {
-            let neuronWeights = JPSNeuralNetworkNeuron.randomWeights(inputCount: inputCount)
-            layerWeights.append(contentsOf: neuronWeights)
-        }
+        vDSP_mmul(weights, 1,
+                  inputs, 1,
+                  &weightedInputs, 1,
+                  vDSP_Length(neuronCount), 1,
+                  vDSP_Length(inputs.count))
         
-        return layerWeights
+        return weightedInputs
     }
     
     /**
@@ -37,21 +46,9 @@ public class JPSNeuralNetworkLayer
      */
     public class func feedForward(neuronCount: Int, activationFunction: JPSNeuralNetworkActivationFunction, inputs: Vector, weights: Vector) -> (activations: Vector, activationRates: Vector)
     {
-        var activations = Vector(repeating: 0, count: neuronCount)
-        
-        vDSP_mmul(weights, 1,
-                  inputs, 1,
-                  &activations, 1,
-                  vDSP_Length(neuronCount), 1,
-                  vDSP_Length(inputs.count))
-        
-        activations = activations.map({
-            return activationFunction.activation($0)
-        })
-        
-        let activationRates = activations.map({
-            return activationFunction.derivative($0)
-        })
+        let weightedInputs = JPSNeuralNetworkLayer.weightedInputs(neuronCount: neuronCount, activationFunction: activationFunction, inputs: inputs, weights: weights)
+        let activations = activationFunction.activations(weightedInputs)
+        let activationRates = activationFunction.gradient(activations)
         
         return (activations, activationRates)
     }

@@ -13,10 +13,15 @@
 		AB249A061EC4DBC2001F831F /* t10k-images.idx3-ubyte in Resources */ = {isa = PBXBuildFile; fileRef = AB249A001EC4DA32001F831F /* t10k-images.idx3-ubyte */; };
 		AB249A071EC4DBC5001F831F /* t10k-labels.idx1-ubyte in Resources */ = {isa = PBXBuildFile; fileRef = AB249A011EC4DA32001F831F /* t10k-labels.idx1-ubyte */; };
 		AB249A081EC4DBDA001F831F /* JPSMNISTDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7884751EBA3AF7007CD9B0 /* JPSMNISTDataLoader.swift */; };
+		AB249A0C1EC51658001F831F /* CostGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB249A0B1EC51658001F831F /* CostGraphViewController.swift */; };
+		AB249A0E1EC51663001F831F /* LiveTrainingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB249A0D1EC51663001F831F /* LiveTrainingViewController.swift */; };
+		AB249A101EC517BE001F831F /* UIImage+Pixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB249A0F1EC517BE001F831F /* UIImage+Pixel.swift */; };
+		AB249A131EC517F8001F831F /* TimeInterval+Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB249A121EC517F8001F831F /* TimeInterval+Formatting.swift */; };
+		AB249A171EC7E01C001F831F /* forestfires.csv in Resources */ = {isa = PBXBuildFile; fileRef = AB249A161EC7E01C001F831F /* forestfires.csv */; };
 		AB64044E1EC4BC8E00FCA969 /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB64044D1EC4BC8E00FCA969 /* libCorePlot-CocoaTouch.a */; };
 		AB6404501EC4BDB300FCA969 /* CorePlot.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AB64044B1EC4BC6600FCA969 /* CorePlot.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AB6C44031E93C84D000DAF9E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C44021E93C84D000DAF9E /* AppDelegate.swift */; };
-		AB6C44051E93C84D000DAF9E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C44041E93C84D000DAF9E /* ViewController.swift */; };
+		AB6C44051E93C84D000DAF9E /* TrainingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C44041E93C84D000DAF9E /* TrainingViewController.swift */; };
 		AB6C44081E93C84D000DAF9E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB6C44061E93C84D000DAF9E /* Main.storyboard */; };
 		AB6C440A1E93C84D000DAF9E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB6C44091E93C84D000DAF9E /* Assets.xcassets */; };
 		AB6C440D1E93C84D000DAF9E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB6C440B1E93C84D000DAF9E /* LaunchScreen.storyboard */; };
@@ -73,11 +78,17 @@
 		AB2499FB1EC4D386001F831F /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
 		AB249A001EC4DA32001F831F /* t10k-images.idx3-ubyte */ = {isa = PBXFileReference; lastKnownFileType = file; path = "t10k-images.idx3-ubyte"; sourceTree = "<group>"; };
 		AB249A011EC4DA32001F831F /* t10k-labels.idx1-ubyte */ = {isa = PBXFileReference; lastKnownFileType = file; path = "t10k-labels.idx1-ubyte"; sourceTree = "<group>"; };
+		AB249A091EC4F967001F831F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		AB249A0B1EC51658001F831F /* CostGraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CostGraphViewController.swift; sourceTree = "<group>"; };
+		AB249A0D1EC51663001F831F /* LiveTrainingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveTrainingViewController.swift; sourceTree = "<group>"; };
+		AB249A0F1EC517BE001F831F /* UIImage+Pixel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Pixel.swift"; sourceTree = "<group>"; };
+		AB249A121EC517F8001F831F /* TimeInterval+Formatting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Formatting.swift"; sourceTree = "<group>"; };
+		AB249A161EC7E01C001F831F /* forestfires.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = forestfires.csv; sourceTree = "<group>"; };
 		AB64044B1EC4BC6600FCA969 /* CorePlot.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CorePlot.framework; sourceTree = "<group>"; };
 		AB64044D1EC4BC8E00FCA969 /* libCorePlot-CocoaTouch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libCorePlot-CocoaTouch.a"; sourceTree = "<group>"; };
 		AB6C43FF1E93C84D000DAF9E /* JPSNeuralNetwork.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JPSNeuralNetwork.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB6C44021E93C84D000DAF9E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		AB6C44041E93C84D000DAF9E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		AB6C44041E93C84D000DAF9E /* TrainingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingViewController.swift; sourceTree = "<group>"; };
 		AB6C44071E93C84D000DAF9E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AB6C44091E93C84D000DAF9E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AB6C440C1E93C84D000DAF9E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -215,6 +226,7 @@
 				AB2499F91EC4D386001F831F /* UIImage+Resize.m */,
 				AB2499FA1EC4D386001F831F /* UIImage+RoundedCorner.h */,
 				AB2499FB1EC4D386001F831F /* UIImage+RoundedCorner.m */,
+				AB249A0F1EC517BE001F831F /* UIImage+Pixel.swift */,
 			);
 			path = "UIImage Extensions";
 			sourceTree = "<group>";
@@ -222,8 +234,8 @@
 		AB249A021EC4DA3B001F831F /* JPSFramework */ = {
 			isa = PBXGroup;
 			children = (
-				AB249A051EC4DAD6001F831F /* JPSBinaryDataLoader */,
 				AB6C44321E93C8AA000DAF9E /* JPSNeuralNetwork */,
+				AB249A051EC4DAD6001F831F /* JPSBinaryDataLoader */,
 			);
 			path = JPSFramework;
 			sourceTree = "<group>";
@@ -231,8 +243,8 @@
 		AB249A031EC4DA41001F831F /* Training Datasets */ = {
 			isa = PBXGroup;
 			children = (
-				AB7884711EB3C836007CD9B0 /* train-labels.idx1-ubyte */,
-				AB7884731EB3C840007CD9B0 /* train-images.idx3-ubyte */,
+				AB249A161EC7E01C001F831F /* forestfires.csv */,
+				AB249A141EC7DFFF001F831F /* MNIST */,
 			);
 			path = "Training Datasets";
 			sourceTree = "<group>";
@@ -240,8 +252,7 @@
 		AB249A041EC4DA48001F831F /* Testing Datasets */ = {
 			isa = PBXGroup;
 			children = (
-				AB249A001EC4DA32001F831F /* t10k-images.idx3-ubyte */,
-				AB249A011EC4DA32001F831F /* t10k-labels.idx1-ubyte */,
+				AB249A151EC7E00A001F831F /* MNIST */,
 			);
 			path = "Testing Datasets";
 			sourceTree = "<group>";
@@ -252,7 +263,43 @@
 				AB7884611EB21C24007CD9B0 /* JPSBinaryDataLoader.swift */,
 				AB7884751EBA3AF7007CD9B0 /* JPSMNISTDataLoader.swift */,
 			);
-			name = JPSBinaryDataLoader;
+			path = JPSBinaryDataLoader;
+			sourceTree = "<group>";
+		};
+		AB249A111EC517E1001F831F /* TimeInterval Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				AB249A121EC517F8001F831F /* TimeInterval+Formatting.swift */,
+			);
+			path = "TimeInterval Extensions";
+			sourceTree = "<group>";
+		};
+		AB249A141EC7DFFF001F831F /* MNIST */ = {
+			isa = PBXGroup;
+			children = (
+				AB7884711EB3C836007CD9B0 /* train-labels.idx1-ubyte */,
+				AB7884731EB3C840007CD9B0 /* train-images.idx3-ubyte */,
+			);
+			name = MNIST;
+			sourceTree = "<group>";
+		};
+		AB249A151EC7E00A001F831F /* MNIST */ = {
+			isa = PBXGroup;
+			children = (
+				AB249A001EC4DA32001F831F /* t10k-images.idx3-ubyte */,
+				AB249A011EC4DA32001F831F /* t10k-labels.idx1-ubyte */,
+			);
+			name = MNIST;
+			sourceTree = "<group>";
+		};
+		AB249A1C1ECF43A6001F831F /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				AB6C44041E93C84D000DAF9E /* TrainingViewController.swift */,
+				AB249A0B1EC51658001F831F /* CostGraphViewController.swift */,
+				AB249A0D1EC51663001F831F /* LiveTrainingViewController.swift */,
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 		AB6C43F61E93C84D000DAF9E = {
@@ -279,17 +326,19 @@
 		AB6C44011E93C84D000DAF9E /* JPSNeuralNetwork */ = {
 			isa = PBXGroup;
 			children = (
-				AB2499F51EC4D222001F831F /* Objective-C_BridgingHeader.h */,
+				AB249A091EC4F967001F831F /* README.md */,
 				AB6C440B1E93C84D000DAF9E /* LaunchScreen.storyboard */,
 				AB6C44061E93C84D000DAF9E /* Main.storyboard */,
-				AB6C44091E93C84D000DAF9E /* Assets.xcassets */,
 				AB6C44021E93C84D000DAF9E /* AppDelegate.swift */,
-				AB6C44041E93C84D000DAF9E /* ViewController.swift */,
+				AB2499F51EC4D222001F831F /* Objective-C_BridgingHeader.h */,
+				AB6C44091E93C84D000DAF9E /* Assets.xcassets */,
 				AB6C440E1E93C84D000DAF9E /* Info.plist */,
+				AB249A1C1ECF43A6001F831F /* View Controllers */,
 				AB249A031EC4DA41001F831F /* Training Datasets */,
 				AB249A041EC4DA48001F831F /* Testing Datasets */,
-				AB249A021EC4DA3B001F831F /* JPSFramework */,
+				AB249A111EC517E1001F831F /* TimeInterval Extensions */,
 				AB2499FF1EC4D5BE001F831F /* UIImage Extensions */,
+				AB249A021EC4DA3B001F831F /* JPSFramework */,
 			);
 			path = JPSNeuralNetwork;
 			sourceTree = "<group>";
@@ -319,7 +368,7 @@
 				AB6C44331E93C8B9000DAF9E /* JPSNeuralNetworkLayer.swift */,
 				AB6C44301E93C872000DAF9E /* JPSNeuralNetworkNeuron.swift */,
 			);
-			name = JPSNeuralNetwork;
+			path = JPSNeuralNetwork;
 			sourceTree = "<group>";
 		};
 		ABF025E31EC4B8D200B0302E /* Frameworks */ = {
@@ -537,6 +586,7 @@
 				AB6C440D1E93C84D000DAF9E /* LaunchScreen.storyboard in Resources */,
 				AB6C440A1E93C84D000DAF9E /* Assets.xcassets in Resources */,
 				AB6C44081E93C84D000DAF9E /* Main.storyboard in Resources */,
+				AB249A171EC7E01C001F831F /* forestfires.csv in Resources */,
 				AB7884741EB3C840007CD9B0 /* train-images.idx3-ubyte in Resources */,
 				AB7884721EB3C836007CD9B0 /* train-labels.idx1-ubyte in Resources */,
 			);
@@ -563,15 +613,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB249A0E1EC51663001F831F /* LiveTrainingViewController.swift in Sources */,
 				AB249A081EC4DBDA001F831F /* JPSMNISTDataLoader.swift in Sources */,
 				AB6C44361E93C8C5000DAF9E /* JPSNeuralNetwork.swift in Sources */,
+				AB249A0C1EC51658001F831F /* CostGraphViewController.swift in Sources */,
 				AB6C44311E93C872000DAF9E /* JPSNeuralNetworkNeuron.swift in Sources */,
 				AB7884621EB21C24007CD9B0 /* JPSBinaryDataLoader.swift in Sources */,
 				AB2499FC1EC4D386001F831F /* UIImage+Alpha.m in Sources */,
 				AB2499FD1EC4D386001F831F /* UIImage+Resize.m in Sources */,
+				AB249A101EC517BE001F831F /* UIImage+Pixel.swift in Sources */,
 				AB2499FE1EC4D386001F831F /* UIImage+RoundedCorner.m in Sources */,
-				AB6C44051E93C84D000DAF9E /* ViewController.swift in Sources */,
+				AB6C44051E93C84D000DAF9E /* TrainingViewController.swift in Sources */,
 				AB6C44031E93C84D000DAF9E /* AppDelegate.swift in Sources */,
+				AB249A131EC517F8001F831F /* TimeInterval+Formatting.swift in Sources */,
 				AB6C44341E93C8B9000DAF9E /* JPSNeuralNetworkLayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
