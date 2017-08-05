@@ -15,7 +15,7 @@
 		AB249A081EC4DBDA001F831F /* JPSMNISTDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7884751EBA3AF7007CD9B0 /* JPSMNISTDataLoader.swift */; };
 		AB249A0C1EC51658001F831F /* CostGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB249A0B1EC51658001F831F /* CostGraphViewController.swift */; };
 		AB249A0E1EC51663001F831F /* LiveTrainingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB249A0D1EC51663001F831F /* LiveTrainingViewController.swift */; };
-		AB249A101EC517BE001F831F /* UIImage+Pixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB249A0F1EC517BE001F831F /* UIImage+Pixel.swift */; };
+		AB249A101EC517BE001F831F /* UIImage+PixelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB249A0F1EC517BE001F831F /* UIImage+PixelData.swift */; };
 		AB249A131EC517F8001F831F /* TimeInterval+Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB249A121EC517F8001F831F /* TimeInterval+Formatting.swift */; };
 		AB249A171EC7E01C001F831F /* forestfires.csv in Resources */ = {isa = PBXBuildFile; fileRef = AB249A161EC7E01C001F831F /* forestfires.csv */; };
 		AB64044E1EC4BC8E00FCA969 /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB64044D1EC4BC8E00FCA969 /* libCorePlot-CocoaTouch.a */; };
@@ -33,6 +33,10 @@
 		AB7884621EB21C24007CD9B0 /* JPSBinaryDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7884611EB21C24007CD9B0 /* JPSBinaryDataLoader.swift */; };
 		AB7884721EB3C836007CD9B0 /* train-labels.idx1-ubyte in Resources */ = {isa = PBXBuildFile; fileRef = AB7884711EB3C836007CD9B0 /* train-labels.idx1-ubyte */; };
 		AB7884741EB3C840007CD9B0 /* train-images.idx3-ubyte in Resources */ = {isa = PBXBuildFile; fileRef = AB7884731EB3C840007CD9B0 /* train-images.idx3-ubyte */; };
+		ABE05D7B1ED4CDC700A7EC53 /* JPSCanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE05D7A1ED4CDC700A7EC53 /* JPSCanvasView.swift */; };
+		ABE8FBDE1F3625930093A79A /* JPSNeuralNetworkErrorFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE8FBDD1F3625930093A79A /* JPSNeuralNetworkErrorFunction.swift */; };
+		ABE8FBE01F3625B90093A79A /* JPSNeuralNetworkActivationFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE8FBDF1F3625B90093A79A /* JPSNeuralNetworkActivationFunction.swift */; };
+		ABE8FBE31F3625EE0093A79A /* Array+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABE8FBE21F3625EE0093A79A /* Array+Extra.swift */; };
 		ABF025E51EC4B8D300B0302E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABF025E41EC4B8D300B0302E /* QuartzCore.framework */; };
 		ABF025E71EC4B8D600B0302E /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABF025E61EC4B8D600B0302E /* Accelerate.framework */; };
 /* End PBXBuildFile section */
@@ -81,7 +85,7 @@
 		AB249A091EC4F967001F831F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		AB249A0B1EC51658001F831F /* CostGraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CostGraphViewController.swift; sourceTree = "<group>"; };
 		AB249A0D1EC51663001F831F /* LiveTrainingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveTrainingViewController.swift; sourceTree = "<group>"; };
-		AB249A0F1EC517BE001F831F /* UIImage+Pixel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Pixel.swift"; sourceTree = "<group>"; };
+		AB249A0F1EC517BE001F831F /* UIImage+PixelData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+PixelData.swift"; sourceTree = "<group>"; };
 		AB249A121EC517F8001F831F /* TimeInterval+Formatting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Formatting.swift"; sourceTree = "<group>"; };
 		AB249A161EC7E01C001F831F /* forestfires.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = forestfires.csv; sourceTree = "<group>"; };
 		AB64044B1EC4BC6600FCA969 /* CorePlot.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CorePlot.framework; sourceTree = "<group>"; };
@@ -106,6 +110,10 @@
 		AB7884711EB3C836007CD9B0 /* train-labels.idx1-ubyte */ = {isa = PBXFileReference; lastKnownFileType = file; path = "train-labels.idx1-ubyte"; sourceTree = "<group>"; };
 		AB7884731EB3C840007CD9B0 /* train-images.idx3-ubyte */ = {isa = PBXFileReference; lastKnownFileType = file; path = "train-images.idx3-ubyte"; sourceTree = "<group>"; };
 		AB7884751EBA3AF7007CD9B0 /* JPSMNISTDataLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JPSMNISTDataLoader.swift; sourceTree = "<group>"; };
+		ABE05D7A1ED4CDC700A7EC53 /* JPSCanvasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JPSCanvasView.swift; path = "../View Controllers/JPSCanvasView.swift"; sourceTree = "<group>"; };
+		ABE8FBDD1F3625930093A79A /* JPSNeuralNetworkErrorFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JPSNeuralNetworkErrorFunction.swift; sourceTree = "<group>"; };
+		ABE8FBDF1F3625B90093A79A /* JPSNeuralNetworkActivationFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JPSNeuralNetworkActivationFunction.swift; sourceTree = "<group>"; };
+		ABE8FBE21F3625EE0093A79A /* Array+Extra.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extra.swift"; sourceTree = "<group>"; };
 		ABF025E41EC4B8D300B0302E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		ABF025E61EC4B8D600B0302E /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		ABF025F01EC4BA7D00B0302E /* CorePlot-CocoaTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CorePlot-CocoaTouch.h"; sourceTree = "<group>"; };
@@ -226,7 +234,7 @@
 				AB2499F91EC4D386001F831F /* UIImage+Resize.m */,
 				AB2499FA1EC4D386001F831F /* UIImage+RoundedCorner.h */,
 				AB2499FB1EC4D386001F831F /* UIImage+RoundedCorner.m */,
-				AB249A0F1EC517BE001F831F /* UIImage+Pixel.swift */,
+				AB249A0F1EC517BE001F831F /* UIImage+PixelData.swift */,
 			);
 			path = "UIImage Extensions";
 			sourceTree = "<group>";
@@ -234,6 +242,7 @@
 		AB249A021EC4DA3B001F831F /* JPSFramework */ = {
 			isa = PBXGroup;
 			children = (
+				ABE05D7A1ED4CDC700A7EC53 /* JPSCanvasView.swift */,
 				AB6C44321E93C8AA000DAF9E /* JPSNeuralNetwork */,
 				AB249A051EC4DAD6001F831F /* JPSBinaryDataLoader */,
 			);
@@ -333,6 +342,8 @@
 				AB2499F51EC4D222001F831F /* Objective-C_BridgingHeader.h */,
 				AB6C44091E93C84D000DAF9E /* Assets.xcassets */,
 				AB6C440E1E93C84D000DAF9E /* Info.plist */,
+				ABE05D7D1ED4D0B500A7EC53 /* Models */,
+				ABE05D7C1ED4D0A700A7EC53 /* Views */,
 				AB249A1C1ECF43A6001F831F /* View Controllers */,
 				AB249A031EC4DA41001F831F /* Training Datasets */,
 				AB249A041EC4DA48001F831F /* Testing Datasets */,
@@ -364,11 +375,36 @@
 		AB6C44321E93C8AA000DAF9E /* JPSNeuralNetwork */ = {
 			isa = PBXGroup;
 			children = (
+				ABE8FBE11F3625D10093A79A /* Standard Library Extensions */,
 				AB6C44351E93C8C5000DAF9E /* JPSNeuralNetwork.swift */,
 				AB6C44331E93C8B9000DAF9E /* JPSNeuralNetworkLayer.swift */,
 				AB6C44301E93C872000DAF9E /* JPSNeuralNetworkNeuron.swift */,
+				ABE8FBDD1F3625930093A79A /* JPSNeuralNetworkErrorFunction.swift */,
+				ABE8FBDF1F3625B90093A79A /* JPSNeuralNetworkActivationFunction.swift */,
 			);
 			path = JPSNeuralNetwork;
+			sourceTree = "<group>";
+		};
+		ABE05D7C1ED4D0A700A7EC53 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		ABE05D7D1ED4D0B500A7EC53 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		ABE8FBE11F3625D10093A79A /* Standard Library Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				ABE8FBE21F3625EE0093A79A /* Array+Extra.swift */,
+			);
+			path = "Standard Library Extensions";
 			sourceTree = "<group>";
 		};
 		ABF025E31EC4B8D200B0302E /* Frameworks */ = {
@@ -615,15 +651,19 @@
 			files = (
 				AB249A0E1EC51663001F831F /* LiveTrainingViewController.swift in Sources */,
 				AB249A081EC4DBDA001F831F /* JPSMNISTDataLoader.swift in Sources */,
+				ABE05D7B1ED4CDC700A7EC53 /* JPSCanvasView.swift in Sources */,
 				AB6C44361E93C8C5000DAF9E /* JPSNeuralNetwork.swift in Sources */,
+				ABE8FBE31F3625EE0093A79A /* Array+Extra.swift in Sources */,
 				AB249A0C1EC51658001F831F /* CostGraphViewController.swift in Sources */,
 				AB6C44311E93C872000DAF9E /* JPSNeuralNetworkNeuron.swift in Sources */,
 				AB7884621EB21C24007CD9B0 /* JPSBinaryDataLoader.swift in Sources */,
 				AB2499FC1EC4D386001F831F /* UIImage+Alpha.m in Sources */,
 				AB2499FD1EC4D386001F831F /* UIImage+Resize.m in Sources */,
-				AB249A101EC517BE001F831F /* UIImage+Pixel.swift in Sources */,
+				AB249A101EC517BE001F831F /* UIImage+PixelData.swift in Sources */,
 				AB2499FE1EC4D386001F831F /* UIImage+RoundedCorner.m in Sources */,
 				AB6C44051E93C84D000DAF9E /* TrainingViewController.swift in Sources */,
+				ABE8FBDE1F3625930093A79A /* JPSNeuralNetworkErrorFunction.swift in Sources */,
+				ABE8FBE01F3625B90093A79A /* JPSNeuralNetworkActivationFunction.swift in Sources */,
 				AB6C44031E93C84D000DAF9E /* AppDelegate.swift in Sources */,
 				AB249A131EC517F8001F831F /* TimeInterval+Formatting.swift in Sources */,
 				AB6C44341E93C8B9000DAF9E /* JPSNeuralNetworkLayer.swift in Sources */,

@@ -13,8 +13,8 @@ class CostGraphViewController: UIViewController
 {
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     
-    var epochs: Int?
-    var costs: Vector?
+    var dependentVariables: Vector?
+    var independentVariables: Vector?
     
     override func viewDidLoad()
     {
@@ -73,10 +73,10 @@ class CostGraphViewController: UIViewController
             plotSymbol.size = CGSize(width: 1, height: 1)
             
             // Setup some floats that represent the min/max values on our axis.
-            let xAxisMin: Float = 0
-            let xAxisMax: Float = 1
-            let yAxisMin: Float = 0
-            let yAxisMax: Float = 1
+            let xAxisMin: Float = self.independentVariables!.min()!
+            let xAxisMax: Float = self.independentVariables!.max()!
+            let yAxisMin: Float = self.dependentVariables!.min()!
+            let yAxisMax: Float = self.dependentVariables!.max()!
             
             // We modify the graph's plot space to setup the axis' min / max values.
             let plotSpace = (graph.defaultPlotSpace as! CPTXYPlotSpace)
@@ -103,7 +103,7 @@ class CostGraphViewController: UIViewController
 extension CostGraphViewController: CPTScatterPlotDataSource
 {
     func numberOfRecords(for plot: CPTPlot) -> UInt {
-        return UInt(self.costs!.count)
+        return UInt(self.independentVariables!.count)
     }
     
     func number(for plot: CPTPlot, field fieldEnum: UInt, record idx: UInt) -> Any?
@@ -115,13 +115,13 @@ extension CostGraphViewController: CPTScatterPlotDataSource
         switch field
         {
         case .X:
-            number = NSNumber(value: Scalar(idx) / Scalar(self.epochs!))
+            number = NSNumber(value: self.independentVariables![Int(idx)])
             
         case .Y:
             fallthrough
             
         default:
-            number = NSNumber(value: self.costs![Int(idx)])
+            number = NSNumber(value: self.dependentVariables![Int(idx)])
             break
         }
         

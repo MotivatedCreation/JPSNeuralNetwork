@@ -1,5 +1,6 @@
 //
 //  JPSNeuralNetworkNeuron.swift
+//  JPSNeuralNetwork
 //
 //  Created by Jonathan Sullivan on 4/4/17.
 //
@@ -10,7 +11,19 @@ public typealias Scalar = Float
 public typealias Vector = [Scalar]
 public typealias Matrix = [Vector]
 
-public class JPSNeuralNetworkNeuron
+/*
+    NOTE:
+ 
+    The majority of these functions are class (static) functions to retain the notation of "pure" functions. This is useful for parallel processing
+    and is beneficial by knowing the exact state at each step.
+*/
+
+public class JPSNeuralNetworkNeuron { }
+
+/*
+    Helper Functions
+*/
+extension JPSNeuralNetworkNeuron
 {
     /**
         Used to generate a single random weight.
@@ -24,7 +37,7 @@ public class JPSNeuralNetworkNeuron
     }
     
     /**
-     Used to generate a vector of random weights.
+        Used to generate a vector of random weights.
     */
     public class func randomWeights(inputCount: Int) -> Vector
     {

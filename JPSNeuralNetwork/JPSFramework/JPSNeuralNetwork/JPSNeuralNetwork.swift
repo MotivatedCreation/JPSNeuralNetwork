@@ -1,5 +1,6 @@
 //
 //  JPSNeuralNetwork.swift
+//  JPSNeuralNetwork
 //
 //  Created by Jonathan Sullivan on 4/4/17.
 //
@@ -7,126 +8,90 @@
 import Foundation
 import Accelerate
 
-public protocol JPSNeuralNetworkDelegate
+public protocol JPSNeuralNetworkDelegate: class
 {
-    func network(costDidChange cost: Scalar)
-    func network(progressDidChange progress: Scalar)
-    func network(overallProgressDidChange progress: Scalar)
-}
-
-public enum JPSNeuralNetworkCostFunction: Int
-{
-    case sumOfSquared = 0
-    case meanSquared = 1
-    case crossEntropy = 2
-    
-    func derivative(OfOutput output: Scalar, targetOutput: Scalar) -> Scalar
-    {
-        switch self
-        {
-        case .crossEntropy:
-            return ((output - targetOutput) / ((1 - output) * output))
-            
-        case .meanSquared:
-            fallthrough
-            
-        default:
-            return (output - targetOutput)
-        }
-    }
-    
-    func gradient(OfOutputs outputs: Vector, targetOutputs: Vector) -> Vector
-    {
-        return zip(outputs, targetOutputs).map({
-            return self.derivative(OfOutput: $0, targetOutput: $1)
-        })
-    }
-    
-    func cost(forOutputs outputs: Matrix, targetOutputs: Matrix) -> Scalar
-    {
-        switch self
-        {
-        case .crossEntropy:
-            return zip(outputs.joined(), targetOutputs.joined()).reduce(0, { (sum, pair) -> Scalar in
-                return (sum + (log(pair.0) + (1 - pair.1) * log(1 - pair.0)))
-            })
-            
-        case .meanSquared:
-            return (2 * JPSNeuralNetworkCostFunction.sumOfSquared.cost(forOutputs: outputs, targetOutputs: targetOutputs) / Scalar(outputs.count))
-            
-        case .sumOfSquared:
-            return zip(outputs.joined(), targetOutputs.joined()).reduce(0, { (sum, pair) -> Scalar in
-                return (sum + pow(pair.1 - pair.0, 2))
-            })
-        }
-    }
-}
-
-public enum JPSNeuralNetworkActivationFunction: Int
-{
-    case sigmoid = 0
-    case hyperbolicTangent = 1
-    
-    func derivative(_ activation: Scalar) -> Scalar
-    {
-        switch self
-        {
-        case .hyperbolicTangent:
-            return (1 - pow(activation, 2))
-            
-        case .sigmoid:
-            return (activation * (1 - activation))
-        }
-    }
-    
-    func gradient(_ activations: Vector) -> Vector
-    {
-        return activations.map({
-            return self.derivative($0)
-        })
-    }
-    
-    func activation(_ weightedInput: Scalar) -> Scalar
-    {
-        switch self
-        {
-        case .hyperbolicTangent:
-            return tanh(weightedInput)
-            
-        case .sigmoid:
-            return (1 / (1 + exp(-weightedInput)))
-        }
-    }
-    
-    func activations(_ weightedInputs: Vector) -> Vector
-    {
-        return weightedInputs.map({
-            return self.activation($0)
-        })
-    }
+    func network(_ network: JPSNeuralNetwork, errorDidChange error: Scalar)
+    func network(_ network: JPSNeuralNetwork, progressDidChange progress: Scalar)
+    func network(_ network: JPSNeuralNetwork, overallProgressDidChange progress: Scalar)
 }
 
 public class JPSNeuralNetwork
 {
-    private var isTraining = false
+    public enum JPSNeuralNetworkError: Error {
+        case TrainingError(String)
+    }
     
-    private typealias FeedForwardResult = (inputs: Matrix, activations: Matrix, activationRates: Matrix)
+    fileprivate var isTraining = false
+    
+    public typealias FeedForwardResult = (inputs: Matrix, activations: Matrix)
     
     public let architecture: [Int]!
     public let activationFunctions: [JPSNeuralNetworkActivationFunction]!
     
-    public var weights: Matrix!
     public var bias: Scalar = 1
-    public var delegate: JPSNeuralNetworkDelegate?
+    public var weights: Matrix!
+    public var previousWeights: Matrix!
+    
+    public weak var delegate: JPSNeuralNetworkDelegate?
     
     public init(architecture: [Int], activationFunctions: [JPSNeuralNetworkActivationFunction])
     {
         self.architecture = architecture
         self.activationFunctions = activationFunctions
         self.weights = JPSNeuralNetwork.weights(forArchitecture: self.architecture)
+        self.previousWeights = self.weights
     }
+}
 
-    private class func weights(forArchitecture architecture: [Int]) -> Matrix
+/*
+    Feed Forward Functions
+*/
+extension JPSNeuralNetwork
+{
+    private class func feed(architecture: [Int], inputs: Vector, weights: Matrix, bias: Scalar, activationFunctions: [JPSNeuralNetworkActivationFunction]) -> FeedForwardResult
+    {
+        var previousActivations = inputs
+        
+        var networkInputs = Matrix()
+        var networkActivations = Matrix()
+        
+        // Ignore the input layer as it's just a placeholder.
+        for (activationFunction, (neuronCount, layerWeights)) in zip(activationFunctions, zip(architecture[1..<architecture.count], weights))
+        {
+            var layerInputs = previousActivations
+            layerInputs.append(bias)
+            networkInputs.append(layerInputs)
+            
+            previousActivations = JPSNeuralNetworkLayer.feedForward(neuronCount: neuronCount, activationFunction: activationFunction, inputs: layerInputs, weights: layerWeights)
+            networkActivations.append(previousActivations)
+        }
+        
+        return (networkInputs, networkActivations)
+    }
+    
+    public func feedForward(inputs: Vector) -> Vector {
+        return self.feedForward(inputs: inputs).activations.last!
+    }
+    
+    fileprivate func feedForward(inputs: Vector) -> FeedForwardResult {
+        return JPSNeuralNetwork.feed(architecture: self.architecture, inputs: inputs, weights: self.weights, bias: self.bias, activationFunctions: self.activationFunctions)
+    }
+    
+    public func feedBackward(inputs: Vector) -> Vector {
+        return self.feedBackward(inputs: inputs).activations.last!
+    }
+    
+    private func feedBackward(inputs: Vector) -> FeedForwardResult {
+        return JPSNeuralNetwork.feed(architecture: self.architecture.reversed(), inputs: inputs, weights: self.weights.reversed(), bias: self.bias, activationFunctions: self.activationFunctions.reversed())
+    }
+}
+
+/*
+    Helper Functions
+*/
+extension JPSNeuralNetwork
+{
+    fileprivate class func weights(forArchitecture architecture: [Int]) -> Matrix
     {
         var weights = Matrix()
         
@@ -135,7 +100,6 @@ public class JPSNeuralNetwork
         for neuronCount in architecture[1..<architecture.count]
         {
             // Plus one for the bias weight.
-            
             let neuronWeights = JPSNeuralNetworkLayer.randomWeights(neuronCount: neuronCount, inputCount: previousNumberOfInputs + 1)
             weights.append(neuronWeights)
             
@@ -145,91 +109,102 @@ public class JPSNeuralNetwork
         return weights
     }
     
-    public func feedForward(inputs: Vector) -> Vector {
-        return self.feedForward(inputs: inputs).activations.last!
+    public func preprocess(inputs: Vector) -> Vector
+    {
+        let average = inputs.reduce(0, +) / Scalar(inputs.count)
+        //let variance = inputs.map({ return $0 * $0 }).reduce(0, +) / Scalar(inputs.count)
+        
+        let preprocessedInputs = inputs.map({
+            return ($0 - average)
+        })
+        
+        return preprocessedInputs
     }
     
-    private func feedForward(inputs: Vector) -> FeedForwardResult
+    fileprivate class func validateParameters(architecture: [Int], activationFunctions: [JPSNeuralNetworkActivationFunction], inputs: Matrix, targetOutputs: Matrix) throws
     {
-        var previousActivations = inputs
-        
-        var networkInputs = Matrix()
-        var networkActivations = Matrix()
-        var networkActivationRates = Matrix()
-        
-        // Ignore the input layer as it's just a place holder.
-        
-        for (activationFunction, (neuronCount, layerWeights)) in zip(self.activationFunctions, zip(self.architecture[1..<self.architecture.count], self.weights))
-        {
-            // Append one for the bias node.
-            
-            var layerInputs = previousActivations
-            layerInputs.append(self.bias)
-            networkInputs.append(layerInputs)
-            
-            let feedForward = JPSNeuralNetworkLayer.feedForward(neuronCount: neuronCount, activationFunction: activationFunction, inputs: layerInputs, weights: layerWeights)
-            
-            previousActivations = feedForward.activations
-            
-            networkActivations.append(previousActivations)
-            networkActivationRates.append(feedForward.activationRates)
+        if architecture.count - 1 != activationFunctions.count {
+            throw JPSNeuralNetworkError.TrainingError("[Invalid topology] The number of layers do not match the number of activation functions.")
         }
         
-        return (networkInputs, networkActivations, networkActivationRates)
-    }
-    
-    private func outputGradient(costFunction: JPSNeuralNetworkCostFunction, activations: Vector, activationRates: Vector, targetOutputs: Vector) -> Vector
-    {
-        var gradient = Vector(repeating: 0, count: activationRates.count)
-        let costRates = costFunction.gradient(OfOutputs: activations, targetOutputs: targetOutputs)
+        let inputNeuronsCount = architecture[0]
         
-        vDSP_vmul(activationRates, 1,
-                  costRates, 1,
+        for (i, input) in inputs.enumerated()
+        {
+            if input.count != inputNeuronsCount {
+                throw JPSNeuralNetworkError.TrainingError("[Invalid architecture] The dimension of the input (\(input.count)) at index \(i) does not equal the dimension of the input layer (\(inputNeuronsCount)) in the architecture.")
+            }
+        }
+        
+        let outputNeuronsCount = architecture.last!
+        
+        for (i, targetOutput) in targetOutputs.enumerated()
+        {
+            if targetOutput.count != outputNeuronsCount {
+                throw JPSNeuralNetworkError.TrainingError("[Invalid architecture] The dimension of the label (\(targetOutput.count)) at index \(i) does not equal the dimension of the output layer (\(outputNeuronsCount)) in the architecture.")
+            }
+        }
+    }
+}
+
+/*
+    Training Functions
+*/
+extension JPSNeuralNetwork
+{
+    private func outputGradient(errorFunction: JPSNeuralNetworErrorFunction, activations: Vector, targetOutputs: Vector) -> Vector
+    {
+        var gradient = Vector(repeating: 0, count: activations.count)
+        let activationGradient = self.activationFunctions.last!.gradient(activations)
+        let errorGradient = errorFunction.gradient(OfOutputs: activations, targetOutputs: targetOutputs)
+        
+        vDSP_vmul(errorGradient, 1,
+                  activationGradient, 1,
                   &gradient, 1,
                   vDSP_Length(gradient.count))
         
         return gradient
     }
     
-    private func gradient(costFunction: JPSNeuralNetworkCostFunction, activations: Matrix, activationRates: Matrix, targetOutputs: Vector) -> Matrix
+    private func gradient(errorFunction: JPSNeuralNetworErrorFunction, activations: Matrix, targetOutputs: Vector) -> Matrix
     {
         let reversedWeights = self.weights.reversed()
         var reversedActivations = (activations.reversed() as Matrix)
-        var reversedActivationRates = (activationRates.reversed() as Matrix)
         
         let outputLayerActivations = reversedActivations.removeFirst()
-        let outputLayerActivationRates = reversedActivationRates.removeFirst()
-        var previousGradient = self.outputGradient(costFunction: costFunction, activations: outputLayerActivations, activationRates: outputLayerActivationRates, targetOutputs: targetOutputs)
+        var previousGradient = self.outputGradient(errorFunction: errorFunction, activations: outputLayerActivations, targetOutputs: targetOutputs)
         
         var gradient = Matrix()
         gradient.append(previousGradient)
         
-        for (layerActivationRates, (layerActivations, layerWeights)) in zip(reversedActivationRates, zip(reversedActivations, reversedWeights))
+        for (layerActivationFunction, (layerActivations, layerWeights)) in zip(self.activationFunctions, zip(reversedActivations, reversedWeights))
         {
-            previousGradient = JPSNeuralNetworkLayer.gradient(forActivations: layerActivations, activationRates: layerActivationRates, weights: layerWeights, gradient: previousGradient)
-            
+            let activationGradient = layerActivationFunction.gradient(layerActivations)
+            previousGradient = JPSNeuralNetworkLayer.gradient(forActivationGradient: activationGradient, weights: layerWeights, gradient: previousGradient)
             gradient.append(previousGradient)
         }
         
         return gradient.reversed()
     }
     
-    private func update(weights: Matrix, learningRate: Scalar, gradient: Matrix, inputs: Matrix) -> Matrix
+    private func updateWeights(learningRate: Scalar, momentum: Scalar, gradient: Matrix, inputs: Matrix) -> Matrix
     {
-        return zip(zip(inputs, weights), gradient).map({ layerInputsAndWeights, layerGradient in
-            return JPSNeuralNetworkLayer.update(weights: layerInputsAndWeights.1, learningRate: learningRate, gradient: layerGradient, inputs: layerInputsAndWeights.0)
+        return zip(zip(inputs, zip(self.weights, self.previousWeights)), gradient).map({ factors, layerGradient in
+            return JPSNeuralNetworkLayer.update(weights: factors.1.0, learningRate: learningRate, momentum: momentum, gradient: layerGradient, inputs: factors.0, previousWeights: factors.1.1)
         })
     }
     
-    private func backpropagate(costFunction: JPSNeuralNetworkCostFunction, learningRate: Scalar, inputs: Matrix, activations: Matrix, activationRates: Matrix, targetOutput: Vector) -> Matrix
+    public func backpropagate(errorFunction: JPSNeuralNetworErrorFunction, learningRate: Scalar, momentum: Scalar, inputs: Matrix, activations: Matrix, targetOutput: Vector) -> Matrix
     {
-        let gradient = self.gradient(costFunction: costFunction, activations: activations, activationRates: activationRates, targetOutputs: targetOutput)
+        let gradient = self.gradient(errorFunction: errorFunction, activations: activations, targetOutputs: targetOutput)
         
-        return self.update(weights: weights, learningRate: learningRate, gradient: gradient, inputs: inputs)
+        return self.updateWeights(learningRate: learningRate, momentum: momentum, gradient: gradient, inputs: inputs)
     }
     
-    public func train(epochs: Int, costFunction: JPSNeuralNetworkCostFunction, learningRate: Scalar, trainingInputs: Matrix, targetOutputs: Matrix) -> Matrix
+    public func train(epochs: Int, errorFunction: JPSNeuralNetworErrorFunction, learningRate: Scalar, momentum: Scalar, trainingInputs: Matrix, targetOutputs: Matrix) throws
     {
+        try JPSNeuralNetwork.validateParameters(architecture: self.architecture, activationFunctions: self.activationFunctions, inputs: trainingInputs, targetOutputs: targetOutputs)
+        
         self.isTraining = true
         
         for epoch in 0..<epochs
@@ -239,26 +214,26 @@ public class JPSNeuralNetwork
             for (index, (inputs, targetOutput)) in zip(trainingInputs, targetOutputs).enumerated()
             {
                 let progress = (Scalar(index + 1) / Scalar(targetOutputs.count))
-                self.delegate?.network(progressDidChange: progress)
+                self.delegate?.network(self, progressDidChange: progress)
                 
                 let overallProgress = ((Scalar(epoch) + progress) / Scalar(epochs))
-                self.delegate?.network(overallProgressDidChange: overallProgress)
+                self.delegate?.network(self, overallProgressDidChange: overallProgress)
                 
                 let feedForward: FeedForwardResult = self.feedForward(inputs: inputs)
                 activations.append(feedForward.activations.last!)
                 
-                self.weights = self.backpropagate(costFunction: costFunction, learningRate: learningRate, inputs: feedForward.inputs, activations: feedForward.activations, activationRates: feedForward.activationRates, targetOutput: targetOutput)
+                let newWeights = self.backpropagate(errorFunction: errorFunction, learningRate: learningRate, momentum: momentum, inputs: feedForward.inputs, activations: feedForward.activations, targetOutput: targetOutput)
+                self.previousWeights = self.weights
+                self.weights = newWeights
                 
                 if (!self.isTraining) { break }
             }
             
             if (!self.isTraining) { break }
             
-            let cost = costFunction.cost(forOutputs: activations, targetOutputs: targetOutputs)
-            delegate?.network(costDidChange: cost)
+            let error = errorFunction.error(forOutputs: activations, targetOutputs: targetOutputs)
+            self.delegate?.network(self, errorDidChange: error)
         }
-        
-        return self.weights
     }
     
     public func cancelTraining() {
