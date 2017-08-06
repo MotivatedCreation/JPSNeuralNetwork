@@ -306,8 +306,15 @@ extension LiveTrainingViewController: JPSNeuralNetworkDelegate
         
         DispatchQueue.main.async
         {
-            self.errorLabel.text = "Error: \(self.currentError) (\(sign)\(abs(deltaError)))"
-            self.errorLabel.textColor = (self.currentError > self.previousError ?  UIColor.red :  UIColor(red: 0, green: (230.0 / 255.0), blue: 0, alpha: 1))
+            let errorLabel = "Error: ".attributedString()
+            
+            let errorColor = (self.currentError > self.previousError ?  UIColor.red :  UIColor(red: 0, green: (230.0 / 255.0), blue: 0, alpha: 1))
+            let errorValue = "\(self.currentError) (\(sign)\(abs(deltaError)))".with(color: errorColor)
+            
+            let error = NSMutableAttributedString(attributedString: errorLabel)
+            error.append(errorValue)
+            
+            self.errorLabel.attributedText = error
         }
     }
     

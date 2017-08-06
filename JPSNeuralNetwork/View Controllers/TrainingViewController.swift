@@ -21,6 +21,7 @@ private enum State
 public class TrainingViewController: UIViewController
 {
     @IBOutlet weak var progressLabel: UILabel!
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var elapsedTimeLabel: UILabel!
     @IBOutlet weak var currentCostLabel: UILabel!
     @IBOutlet weak var currentEpochLabel: UILabel!
@@ -34,6 +35,7 @@ public class TrainingViewController: UIViewController
     @IBOutlet weak var learningRateTextField: UITextField!
     @IBOutlet weak var architectureTextField: UITextField!
     @IBOutlet weak var overallProgressView: UIProgressView!
+    @IBOutlet weak var scrollViewBottomConstraint: NSLayoutConstraint!
     
     fileprivate let graphViewControllerSegueIdentifier = "GraphViewControllerSegue"
     fileprivate let customDataViewControllerSegueIdentifier = "CustomDataViewControllerSegue"
@@ -80,7 +82,10 @@ public class TrainingViewController: UIViewController
         
         self.setupToolbar()
         self.setupProperties()
+        self.addObservers()
     }
+    
+    deinit { self.removeObservers() }
     
     override public func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
@@ -118,6 +123,13 @@ extension TrainingViewController
         self.state = .initial
         
         self.navigationController?.delegate = self
+        
+        let doneInputAccessoryView = self.doneInputAccessoryView()
+        self.biasTextField.inputAccessoryView = doneInputAccessoryView
+        self.epochsTextField.inputAccessoryView = doneInputAccessoryView
+        self.momentumTextField.inputAccessoryView = doneInputAccessoryView
+        self.architectureTextField.inputAccessoryView = doneInputAccessoryView
+        self.learningRateTextField.inputAccessoryView = doneInputAccessoryView
         
         self.buildNetwork(withArchitecture: self.architecture)
     }
@@ -169,6 +181,75 @@ extension TrainingViewController
             self.cancelTrainingBarButton
             
         ], animated: false)
+    }
+}
+
+extension TrainingViewController
+{
+    fileprivate func addObservers()
+    {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    fileprivate func removeObservers()
+    {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    @objc private func keyboardWillShow(_ notification: Notification)
+    {
+        if let duration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? TimeInterval,
+            let keyboardRect = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? CGRect
+        {
+            UIView.animate(withDuration: duration, delay: 0, options: .beginFromCurrentState, animations: { 
+                
+                self.scrollViewBottomConstraint.constant = keyboardRect.height - (self.navigationController?.toolbar.frame.height ?? 0)
+                self.view.layoutIfNeeded()
+                
+            }, completion: nil)
+        }
+    }
+    
+    @objc private func keyboardWillHide(_ notification: Notification)
+    {
+        if let duration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? TimeInterval
+        {
+            UIView.animate(withDuration: duration, delay: 0, options: .beginFromCurrentState, animations: {
+                
+                self.scrollViewBottomConstraint.constant = 0
+                self.view.layoutIfNeeded()
+                
+            }, completion: nil)
+        }
+    }
+}
+
+extension TrainingViewController
+{
+    @objc fileprivate func resignFirstResponder(_ sender: UIButton) {
+        self.view.endEditing(true)
+    }
+    
+    fileprivate func doneInputAccessoryView() -> UIView
+    {
+        let inputAccessoryView = UIView()
+        inputAccessoryView.frame.size.height = 44
+        inputAccessoryView.backgroundColor = UIColor.groupTableViewBackground
+        
+        let doneButton = UIButton(type: .system)
+        doneButton.setTitle("Done", for: .normal)
+        doneButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
+        doneButton.addTarget(self, action: #selector(resignFirstResponder(_:)), for: .touchUpInside)
+        inputAccessoryView.addSubview(doneButton)
+        doneButton.sizeToFit()
+        
+        doneButton.translatesAutoresizingMaskIntoConstraints = false
+        doneButton.centerYAnchor.constraint(equalTo: inputAccessoryView.centerYAnchor).isActive = true
+        doneButton.leadingAnchor.constraint(equalTo: inputAccessoryView.leadingAnchor, constant: 10).isActive = true
+        
+        return inputAccessoryView
     }
 }
 

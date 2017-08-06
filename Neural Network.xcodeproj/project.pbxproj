@@ -19,6 +19,7 @@
 		AB249A131EC517F8001F831F /* TimeInterval+Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB249A121EC517F8001F831F /* TimeInterval+Formatting.swift */; };
 		AB249A171EC7E01C001F831F /* forestfires.csv in Resources */ = {isa = PBXBuildFile; fileRef = AB249A161EC7E01C001F831F /* forestfires.csv */; };
 		AB2F52691F365F79008AC153 /* CustomDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2F52681F365F79008AC153 /* CustomDataViewController.swift */; };
+		AB2F526B1F378327008AC153 /* String+Extra.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2F526A1F378327008AC153 /* String+Extra.swift */; };
 		AB64044E1EC4BC8E00FCA969 /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB64044D1EC4BC8E00FCA969 /* libCorePlot-CocoaTouch.a */; };
 		AB6404501EC4BDB300FCA969 /* CorePlot.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AB64044B1EC4BC6600FCA969 /* CorePlot.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AB6C44031E93C84D000DAF9E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C44021E93C84D000DAF9E /* AppDelegate.swift */; };
@@ -89,6 +90,7 @@
 		AB249A121EC517F8001F831F /* TimeInterval+Formatting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Formatting.swift"; sourceTree = "<group>"; };
 		AB249A161EC7E01C001F831F /* forestfires.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = forestfires.csv; sourceTree = "<group>"; };
 		AB2F52681F365F79008AC153 /* CustomDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomDataViewController.swift; sourceTree = "<group>"; };
+		AB2F526A1F378327008AC153 /* String+Extra.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extra.swift"; sourceTree = "<group>"; };
 		AB64044B1EC4BC6600FCA969 /* CorePlot.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CorePlot.framework; sourceTree = "<group>"; };
 		AB64044D1EC4BC8E00FCA969 /* libCorePlot-CocoaTouch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libCorePlot-CocoaTouch.a"; sourceTree = "<group>"; };
 		AB6C43FF1E93C84D000DAF9E /* Neural Network.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Neural Network.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -404,6 +406,7 @@
 			isa = PBXGroup;
 			children = (
 				ABE8FBE21F3625EE0093A79A /* Array+Extra.swift */,
+				AB2F526A1F378327008AC153 /* String+Extra.swift */,
 			);
 			name = "Standard Library Extensions";
 			path = "JPSNeuralNetwork/Standard Library Extensions";
@@ -654,6 +657,7 @@
 				AB2F52691F365F79008AC153 /* CustomDataViewController.swift in Sources */,
 				AB249A0E1EC51663001F831F /* LiveTrainingViewController.swift in Sources */,
 				AB249A081EC4DBDA001F831F /* JPSMNISTDataLoader.swift in Sources */,
+				AB2F526B1F378327008AC153 /* String+Extra.swift in Sources */,
 				ABE05D7B1ED4CDC700A7EC53 /* JPSCanvasView.swift in Sources */,
 				AB6C44361E93C8C5000DAF9E /* JPSNeuralNetwork.swift in Sources */,
 				ABE8FBE31F3625EE0093A79A /* Array+Extra.swift in Sources */,
