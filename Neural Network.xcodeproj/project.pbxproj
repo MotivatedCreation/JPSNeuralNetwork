@@ -83,7 +83,6 @@
 		AB2499FB1EC4D386001F831F /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
 		AB249A001EC4DA32001F831F /* t10k-images.idx3-ubyte */ = {isa = PBXFileReference; lastKnownFileType = file; path = "t10k-images.idx3-ubyte"; sourceTree = "<group>"; };
 		AB249A011EC4DA32001F831F /* t10k-labels.idx1-ubyte */ = {isa = PBXFileReference; lastKnownFileType = file; path = "t10k-labels.idx1-ubyte"; sourceTree = "<group>"; };
-		AB249A091EC4F967001F831F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		AB249A0B1EC51658001F831F /* CostGraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CostGraphViewController.swift; sourceTree = "<group>"; };
 		AB249A0D1EC51663001F831F /* LiveTrainingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveTrainingViewController.swift; sourceTree = "<group>"; };
 		AB249A0F1EC517BE001F831F /* UIImage+PixelData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+PixelData.swift"; sourceTree = "<group>"; };
@@ -339,7 +338,6 @@
 		AB6C44011E93C84D000DAF9E /* JPSNeuralNetwork */ = {
 			isa = PBXGroup;
 			children = (
-				AB249A091EC4F967001F831F /* README.md */,
 				AB6C440B1E93C84D000DAF9E /* LaunchScreen.storyboard */,
 				AB6C44061E93C84D000DAF9E /* Main.storyboard */,
 				AB6C44021E93C84D000DAF9E /* AppDelegate.swift */,

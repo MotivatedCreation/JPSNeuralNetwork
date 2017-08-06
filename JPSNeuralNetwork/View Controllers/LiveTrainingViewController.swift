@@ -12,12 +12,12 @@ import Accelerate
 
 public class LiveTrainingViewController: UIViewController
 {
-    internal enum ColorSpace: Int
+    fileprivate enum ColorSpace: Int
     {
         case grayScale
         case infer
         
-        internal func pixels(forImage image: UIImage) -> [UInt8]?
+        fileprivate func pixels(forImage image: UIImage) -> [UInt8]?
         {
             guard let cgImage = image.cgImage else { return nil }
             
@@ -31,7 +31,7 @@ public class LiveTrainingViewController: UIViewController
             }
         }
         
-        internal func image(forPixels pixels: [UInt8], referenceImage: UIImage) -> UIImage?
+        fileprivate func image(forPixels pixels: [UInt8], referenceImage: UIImage) -> UIImage?
         {
             guard let cgImage = referenceImage.cgImage else { return nil }
             
@@ -53,7 +53,6 @@ public class LiveTrainingViewController: UIViewController
     @IBOutlet weak internal var errorLabel: UILabel!
     @IBOutlet weak internal var predictionLabel: UILabel!
     @IBOutlet weak internal var canvasView: JPSCanvasView!
-    @IBOutlet weak internal var numberOfOutputsTextField: UITextField!
     @IBOutlet weak internal var correctPredicationTextField: UITextField!
     
     public var momentum: Scalar = 0.1
@@ -66,6 +65,7 @@ public class LiveTrainingViewController: UIViewController
     
     fileprivate let resizedImageSize = CGSize(width: 28, height: 28)
 
+    fileprivate var prediction: Vector?
     fileprivate var imagePixels: Vector?
     fileprivate var resizedImage: UIImage?
     fileprivate var currentError: Float = 0
@@ -76,20 +76,11 @@ public class LiveTrainingViewController: UIViewController
     fileprivate var recreationNetwork: JPSNeuralNetwork?
     fileprivate var classificationNetwork: JPSNeuralNetwork?
     
-    private var prediction: Vector?
-    
     override public func viewDidLoad()
     {
         super.viewDidLoad()
         
-        self.canvasView.delegate = self
-        self.canvasView.layer.cornerRadius = 5
-        self.canvasView.layer.masksToBounds = true
-        self.canvasView.backgroundColor = UIColor.black
-        
-        self.correctPredicationTextField.delegate = self
-        
-        self.buildNetworks(withArchitecture: self.architecture)
+        self.setupProperties()
     }
     
     override public func viewWillAppear(_ animated: Bool)
@@ -107,90 +98,38 @@ public class LiveTrainingViewController: UIViewController
     }
     
     deinit { print("(\((#file as NSString).lastPathComponent) \(#function))") }
-    
-    private class func normalizedPixels(forImage image: UIImage, colorSpace: ColorSpace) -> Vector?
+}
+
+extension LiveTrainingViewController
+{
+    fileprivate func setupProperties()
+    {
+        self.canvasView.delegate = self
+        self.canvasView.layer.cornerRadius = 5
+        self.canvasView.layer.masksToBounds = true
+        self.canvasView.backgroundColor = UIColor.black
+        
+        self.correctPredicationTextField.delegate = self
+        
+        self.buildNetworks(withArchitecture: self.architecture, shouldUseTrainedWeights: true)
+    }
+}
+
+extension LiveTrainingViewController
+{
+    fileprivate class func normalizedPixels(forImage image: UIImage, colorSpace: ColorSpace) -> Vector?
     {
         guard let resizedImagePixels = colorSpace.pixels(forImage: image) else {
             
-            print("Could not load resize image pixels.")
+            print("Could not load resized image pixels.")
             
             return nil
         }
         
-        let maximumComponentValue = Scalar(UInt8.max)
-        
-        return resizedImagePixels.flatMap({ Scalar($0) / maximumComponentValue })
+        return resizedImagePixels.map({ Scalar($0) / Scalar(UInt8.max) })
     }
     
-    internal func printNumber(rowSize: Int, pixels: [UInt8])
-    {
-        let cgImage = self.colorSpace.image(forPixels: pixels, referenceImage: self.resizedImage!)?.cgImage
-        self.canvasView.layer.contents = cgImage
-    }
-    
-    internal func feedPixelsForward(inputs: Vector)
-    {
-        self.prediction = self.classificationNetwork!.feedForward(architecture: self.architecture, activationFunctions: self.activationFunctions, inputs: inputs)
-        self.predictionInverse = self.recreationNetwork!.feedForward(architecture: self.architecture.reversed(), activationFunctions: self.activationFunctions.reversed(), inputs: self.prediction!)
-    }
-    
-    private func predictClassification() -> Scalar
-    {
-        self.feedPixelsForward(inputs: self.imagePixels!)
-        
-        let max = self.prediction!.max()!
-        let predictedDigit = self.prediction!.index(of: max)!
-        return Scalar(predictedDigit)
-    }
-    
-    internal func predict(image: UIImage)
-    {
-        self.imagePixels = LiveTrainingViewController.normalizedPixels(forImage: image, colorSpace: self.colorSpace)
-        self.predictionLabel.text = "Prediction: \(self.predictClassification())"
-    }
-    
-    internal func architectureForOutputs() -> [Int]?
-    {
-        guard let numberOfOutputs = Int(self.numberOfOutputsTextField.text!) else {
-            
-            print("Incorrect number of outputs.")
-            
-            return nil
-        }
-        
-        var architecture = self.architecture
-        architecture[architecture.count - 1] = numberOfOutputs
-        
-        return architecture
-    }
-    
-    internal func canChangeNumberOfOutputs() -> Bool
-    {
-        guard let architecture = self.architectureForOutputs() else {
-            
-            print("Can not resize architecture output layer.")
-            
-            return false
-        }
-        
-        let correctPrediction = self.correctPredicationTextField.text
-        
-        return (correctPrediction == nil || correctPrediction?.characters.count == 0) || (architecture.last! > Int(correctPrediction ?? String(-1))!)
-    }
-    
-    internal func changeNumberOfOutputs()
-    {
-        guard let architecture = self.architectureForOutputs() else {
-            
-            print("Could not resize architecture output layer.")
-            
-            return
-        }
-        
-        self.buildNetworks(withArchitecture: architecture)
-    }
-    
-    internal func targetOutputsForCorrectPredication() -> Vector?
+    fileprivate func targetOutputsForCorrectPredication() -> Vector?
     {
         guard let correctPredication = Int(self.correctPredicationTextField.text!) else {
             
@@ -204,11 +143,54 @@ public class LiveTrainingViewController: UIViewController
         
         return targetOutputs
     }
-    
-    internal func trainNeuralNetwork(epochs: Int, inputs: Matrix, targetOutputs: Matrix)
+}
+
+extension LiveTrainingViewController
+{
+    fileprivate func printNumber(rowSize: Int, pixels: [UInt8])
     {
-        DispatchQueue.global().async
-        {
+        let cgImage = self.colorSpace.image(forPixels: pixels, referenceImage: self.resizedImage!)?.cgImage
+        self.canvasView.layer.contents = cgImage
+    }
+    
+    fileprivate func buildNetworks(withArchitecture architecture: [Int], shouldUseTrainedWeights: Bool)
+    {
+        self.classificationNetwork = JPSNeuralNetwork()
+        self.classificationNetwork!.delegate = self
+        self.classificationNetwork!.bias = 1
+        self.classificationNetwork!.weights = shouldUseTrainedWeights ? self.classificationWeights : JPSNeuralNetwork.weights(forArchitecture: architecture)
+        
+        self.recreationNetwork = JPSNeuralNetwork()
+        self.recreationNetwork!.bias = 1
+        self.recreationNetwork!.weights = shouldUseTrainedWeights ? self.recreationWeights : JPSNeuralNetwork.weights(forArchitecture: architecture.reversed())
+    }
+    
+    fileprivate func feedPixelsForward(inputs: Vector)
+    {
+        self.prediction = self.classificationNetwork!.feedForward(architecture: self.architecture, activationFunctions: self.activationFunctions, inputs: inputs)
+        self.predictionInverse = self.recreationNetwork!.feedForward(architecture: self.architecture.reversed(), activationFunctions: self.activationFunctions.reversed(), inputs: self.prediction!)
+    }
+    
+    fileprivate func predictClassification(for image: UIImage) -> Scalar
+    {
+        self.imagePixels = LiveTrainingViewController.normalizedPixels(forImage: image, colorSpace: self.colorSpace)
+        self.feedPixelsForward(inputs: self.imagePixels!)
+        
+        let max = self.prediction!.max()!
+        let predictedDigit = self.prediction!.index(of: max)!
+        
+        return Scalar(predictedDigit)
+    }
+    
+    fileprivate func predict(image: UIImage)
+    {
+        let predictedClassification = self.predictClassification(for: image)
+        self.predictionLabel.text = "Prediction: \(predictedClassification)"
+    }
+    
+    fileprivate func trainNeuralNetwork(epochs: Int, inputs: Matrix, targetOutputs: Matrix)
+    {
+        DispatchQueue.global().async {
             do
             {
                 // Train the network using the raw image pixels and the correct prediction.
@@ -226,7 +208,7 @@ public class LiveTrainingViewController: UIViewController
         }
     }
     
-    internal func openCamera(fromViewController viewController: UIViewController, usingDelegate delegate: UIImagePickerControllerDelegate & UINavigationControllerDelegate)
+    fileprivate func openCamera(fromViewController viewController: UIViewController, usingDelegate delegate: UIImagePickerControllerDelegate & UINavigationControllerDelegate)
     {
         if !UIImagePickerController.isSourceTypeAvailable(.camera) { return }
         
@@ -236,17 +218,12 @@ public class LiveTrainingViewController: UIViewController
         cameraUI.delegate = delegate
         viewController.present(cameraUI, animated: true, completion: nil)
     }
-    
-    private func buildNetworks(withArchitecture architecture: [Int])
-    {
-        self.classificationNetwork = JPSNeuralNetwork()
-        self.classificationNetwork!.delegate = self
-        self.classificationNetwork!.bias = 1
-        self.classificationNetwork!.weights = self.classificationWeights
-        
-        self.recreationNetwork = JPSNeuralNetwork()
-        self.recreationNetwork!.bias = 1
-        self.recreationNetwork!.weights = self.recreationWeights
+}
+
+extension LiveTrainingViewController
+{
+    @IBAction func openCamera(_ sender: Any) {
+        self.openCamera(fromViewController: self.navigationController!, usingDelegate: self)
     }
     
     @IBAction func backpropagate(_ sender: Any)
@@ -271,10 +248,6 @@ public class LiveTrainingViewController: UIViewController
         }
     }
     
-    @IBAction func openCamera(_ sender: Any) {
-        self.openCamera(fromViewController: self.navigationController!, usingDelegate: self)
-    }
-    
     @IBAction func changeColorSpace(_ sender: UISegmentedControl)
     {
         self.colorSpace = ColorSpace(rawValue: sender.selectedSegmentIndex)!
@@ -285,7 +258,7 @@ public class LiveTrainingViewController: UIViewController
         architecture[0] = Int(self.resizedImageSize.width * self.resizedImageSize.height * numberOfComponents)
         self.architecture = architecture
         
-        self.buildNetworks(withArchitecture: self.architecture)
+        self.buildNetworks(withArchitecture: self.architecture, shouldUseTrainedWeights: false)
     }
 }
 
@@ -316,25 +289,7 @@ extension LiveTrainingViewController: JPSCanvasViewDelegate
 
 extension LiveTrainingViewController: UITextFieldDelegate
 {
-    public func textFieldShouldReturn(_ textField: UITextField) -> Bool
-    {
-        if textField.isEqual(numberOfOutputsTextField)
-        {
-            if self.canChangeNumberOfOutputs() {
-                self.changeNumberOfOutputs()
-            }
-            else {
-                let alertController = UIAlertController(title: "Error", message: "The number of outputs is less than the correct prediction! The number of outputs should be grater than the correct prediction.", preferredStyle: .alert)
-                
-                let okayAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
-                alertController.addAction(okayAction)
-                
-                self.navigationController?.present(alertController, animated: true, completion: nil)
-                
-                return false
-            }
-        }
-        
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return textField.resignFirstResponder()
     }
 }
@@ -375,7 +330,7 @@ extension LiveTrainingViewController: UIImagePickerControllerDelegate
         
         guard let image = selectedImage else  {
             
-            picker.dismiss(animated: true) { }
+            picker.dismiss(animated: true)
             return
         }
         
@@ -386,8 +341,8 @@ extension LiveTrainingViewController: UIImagePickerControllerDelegate
             self.canvasView.clear()
             self.predict(image: image)
             
-            let pixels = self.predictionInverse!.map({
-                return UInt8($0 * Scalar(UInt8.max))
+            let pixels = self.predictionInverse!.map({ value -> UInt8 in
+                return UInt8(value * Scalar(UInt8.max))
             })
             
             self.printNumber(rowSize: Int(self.resizedImageSize.width), pixels: pixels)
