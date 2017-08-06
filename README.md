@@ -9,4 +9,4 @@ A versatile Neural Network.
 - Build view controller for setting custom mapping of outputs.
 
 ## Attributions
-All icons are from https://icons8.com and fall under the (Creative Commons Attribution-NoDerivs 3.0 Unported)[https://creativecommons.org/licenses/by-nd/3.0/ license].
+All icons are from https://icons8.com and fall under the [Creative Commons Attribution-NoDerivs 3.0 Unported](https://creativecommons.org/licenses/by-nd/3.0/) license.
