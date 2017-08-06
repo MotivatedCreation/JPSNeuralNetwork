@@ -25,22 +25,14 @@ public class JPSNeuralNetwork
     
     public typealias FeedForwardResult = (inputs: Matrix, activations: Matrix)
     
-    public let architecture: [Int]!
-    public let activationFunctions: [JPSNeuralNetworkActivationFunction]!
-    
     public var bias: Scalar = 1
-    public var weights: Matrix!
     public var previousWeights: Matrix!
     
-    public weak var delegate: JPSNeuralNetworkDelegate?
-    
-    public init(architecture: [Int], activationFunctions: [JPSNeuralNetworkActivationFunction])
-    {
-        self.architecture = architecture
-        self.activationFunctions = activationFunctions
-        self.weights = JPSNeuralNetwork.weights(forArchitecture: self.architecture)
-        self.previousWeights = self.weights
+    public var weights: Matrix! {
+        didSet { self.previousWeights = self.weights }
     }
+    
+    public weak var delegate: JPSNeuralNetworkDelegate?
 }
 
 /*
@@ -69,20 +61,12 @@ extension JPSNeuralNetwork
         return (networkInputs, networkActivations)
     }
     
-    public func feedForward(inputs: Vector) -> Vector {
-        return self.feedForward(inputs: inputs).activations.last!
+    fileprivate func feedForward(architecture: [Int], activationFunctions: [JPSNeuralNetworkActivationFunction], inputs: Vector) -> FeedForwardResult {
+        return JPSNeuralNetwork.feed(architecture: architecture, inputs: inputs, weights: self.weights, bias: self.bias, activationFunctions: activationFunctions)
     }
     
-    fileprivate func feedForward(inputs: Vector) -> FeedForwardResult {
-        return JPSNeuralNetwork.feed(architecture: self.architecture, inputs: inputs, weights: self.weights, bias: self.bias, activationFunctions: self.activationFunctions)
-    }
-    
-    public func feedBackward(inputs: Vector) -> Vector {
-        return self.feedBackward(inputs: inputs).activations.last!
-    }
-    
-    private func feedBackward(inputs: Vector) -> FeedForwardResult {
-        return JPSNeuralNetwork.feed(architecture: self.architecture.reversed(), inputs: inputs, weights: self.weights.reversed(), bias: self.bias, activationFunctions: self.activationFunctions.reversed())
+    public func feedForward(architecture: [Int], activationFunctions: [JPSNeuralNetworkActivationFunction], inputs: Vector) -> Vector {
+        return self.feedForward(architecture: architecture, activationFunctions: activationFunctions, inputs: inputs).activations.last!
     }
 }
 
@@ -91,7 +75,7 @@ extension JPSNeuralNetwork
 */
 extension JPSNeuralNetwork
 {
-    fileprivate class func weights(forArchitecture architecture: [Int]) -> Matrix
+    public class func weights(forArchitecture architecture: [Int]) -> Matrix
     {
         var weights = Matrix()
         
@@ -124,7 +108,7 @@ extension JPSNeuralNetwork
     fileprivate class func validateParameters(architecture: [Int], activationFunctions: [JPSNeuralNetworkActivationFunction], inputs: Matrix, targetOutputs: Matrix) throws
     {
         if architecture.count - 1 != activationFunctions.count {
-            throw JPSNeuralNetworkError.TrainingError("[Invalid topology] The number of layers do not match the number of activation functions.")
+            throw NSError(domain: "InvalidTopology", code: 1, userInfo: [NSLocalizedFailureReasonErrorKey: "The number of layers do not match the number of activation functions."])
         }
         
         let inputNeuronsCount = architecture[0]
@@ -132,7 +116,7 @@ extension JPSNeuralNetwork
         for (i, input) in inputs.enumerated()
         {
             if input.count != inputNeuronsCount {
-                throw JPSNeuralNetworkError.TrainingError("[Invalid architecture] The dimension of the input (\(input.count)) at index \(i) does not equal the dimension of the input layer (\(inputNeuronsCount)) in the architecture.")
+                throw NSError(domain: "InvalidArchitecture", code: 2, userInfo: [NSLocalizedFailureReasonErrorKey: "The dimension of the input (\(input.count)) at index \(i) does not equal the dimension of the input layer (\(inputNeuronsCount)) in the architecture."])
             }
         }
         
@@ -141,7 +125,7 @@ extension JPSNeuralNetwork
         for (i, targetOutput) in targetOutputs.enumerated()
         {
             if targetOutput.count != outputNeuronsCount {
-                throw JPSNeuralNetworkError.TrainingError("[Invalid architecture] The dimension of the label (\(targetOutput.count)) at index \(i) does not equal the dimension of the output layer (\(outputNeuronsCount)) in the architecture.")
+                throw NSError(domain: "InvalidArchitecture", code: 3, userInfo: [NSLocalizedFailureReasonErrorKey: "The dimension of the label (\(targetOutput.count)) at index \(i) does not equal the dimension of the output layer (\(outputNeuronsCount)) in the architecture."])
             }
         }
     }
@@ -152,10 +136,10 @@ extension JPSNeuralNetwork
 */
 extension JPSNeuralNetwork
 {
-    private func outputGradient(errorFunction: JPSNeuralNetworErrorFunction, activations: Vector, targetOutputs: Vector) -> Vector
+    private func outputGradient(activationFunctions: [JPSNeuralNetworkActivationFunction], errorFunction: JPSNeuralNetworErrorFunction, activations: Vector, targetOutputs: Vector) -> Vector
     {
         var gradient = Vector(repeating: 0, count: activations.count)
-        let activationGradient = self.activationFunctions.last!.gradient(activations)
+        let activationGradient = activationFunctions.last!.gradient(activations)
         let errorGradient = errorFunction.gradient(OfOutputs: activations, targetOutputs: targetOutputs)
         
         vDSP_vmul(errorGradient, 1,
@@ -166,18 +150,18 @@ extension JPSNeuralNetwork
         return gradient
     }
     
-    private func gradient(errorFunction: JPSNeuralNetworErrorFunction, activations: Matrix, targetOutputs: Vector) -> Matrix
+    private func gradient(activationFunctions: [JPSNeuralNetworkActivationFunction], errorFunction: JPSNeuralNetworErrorFunction, activations: Matrix, targetOutputs: Vector) -> Matrix
     {
         let reversedWeights = self.weights.reversed()
         var reversedActivations = (activations.reversed() as Matrix)
         
         let outputLayerActivations = reversedActivations.removeFirst()
-        var previousGradient = self.outputGradient(errorFunction: errorFunction, activations: outputLayerActivations, targetOutputs: targetOutputs)
+        var previousGradient = self.outputGradient(activationFunctions: activationFunctions, errorFunction: errorFunction, activations: outputLayerActivations, targetOutputs: targetOutputs)
         
         var gradient = Matrix()
         gradient.append(previousGradient)
         
-        for (layerActivationFunction, (layerActivations, layerWeights)) in zip(self.activationFunctions, zip(reversedActivations, reversedWeights))
+        for (layerActivationFunction, (layerActivations, layerWeights)) in zip(activationFunctions, zip(reversedActivations, reversedWeights))
         {
             let activationGradient = layerActivationFunction.gradient(layerActivations)
             previousGradient = JPSNeuralNetworkLayer.gradient(forActivationGradient: activationGradient, weights: layerWeights, gradient: previousGradient)
@@ -194,16 +178,16 @@ extension JPSNeuralNetwork
         })
     }
     
-    public func backpropagate(errorFunction: JPSNeuralNetworErrorFunction, learningRate: Scalar, momentum: Scalar, inputs: Matrix, activations: Matrix, targetOutput: Vector) -> Matrix
+    public func backpropagate(activationFunctions: [JPSNeuralNetworkActivationFunction], errorFunction: JPSNeuralNetworErrorFunction, learningRate: Scalar, momentum: Scalar, inputs: Matrix, activations: Matrix, targetOutput: Vector) -> Matrix
     {
-        let gradient = self.gradient(errorFunction: errorFunction, activations: activations, targetOutputs: targetOutput)
+        let gradient = self.gradient(activationFunctions: activationFunctions, errorFunction: errorFunction, activations: activations, targetOutputs: targetOutput)
         
         return self.updateWeights(learningRate: learningRate, momentum: momentum, gradient: gradient, inputs: inputs)
     }
     
-    public func train(epochs: Int, errorFunction: JPSNeuralNetworErrorFunction, learningRate: Scalar, momentum: Scalar, trainingInputs: Matrix, targetOutputs: Matrix) throws
+    public func train(epochs: Int, architecture: [Int], activationFunctions: [JPSNeuralNetworkActivationFunction], errorFunction: JPSNeuralNetworErrorFunction, learningRate: Scalar, momentum: Scalar, trainingInputs: Matrix, targetOutputs: Matrix) throws
     {
-        try JPSNeuralNetwork.validateParameters(architecture: self.architecture, activationFunctions: self.activationFunctions, inputs: trainingInputs, targetOutputs: targetOutputs)
+        try JPSNeuralNetwork.validateParameters(architecture: architecture, activationFunctions: activationFunctions, inputs: trainingInputs, targetOutputs: targetOutputs)
         
         self.isTraining = true
         
@@ -219,10 +203,10 @@ extension JPSNeuralNetwork
                 let overallProgress = ((Scalar(epoch) + progress) / Scalar(epochs))
                 self.delegate?.network(self, overallProgressDidChange: overallProgress)
                 
-                let feedForward: FeedForwardResult = self.feedForward(inputs: inputs)
+                let feedForward: FeedForwardResult = self.feedForward(architecture: architecture, activationFunctions: activationFunctions, inputs: inputs)
                 activations.append(feedForward.activations.last!)
                 
-                let newWeights = self.backpropagate(errorFunction: errorFunction, learningRate: learningRate, momentum: momentum, inputs: feedForward.inputs, activations: feedForward.activations, targetOutput: targetOutput)
+                let newWeights = self.backpropagate(activationFunctions: activationFunctions, errorFunction: errorFunction, learningRate: learningRate, momentum: momentum, inputs: feedForward.inputs, activations: feedForward.activations, targetOutput: targetOutput)
                 self.previousWeights = self.weights
                 self.weights = newWeights
                 

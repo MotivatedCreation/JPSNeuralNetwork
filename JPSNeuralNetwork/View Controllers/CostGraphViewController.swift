@@ -23,13 +23,24 @@ class CostGraphViewController: UIViewController
         self.activityIndicatorView.startAnimating()
         
         let viewBounds = self.view.bounds
-        let yOffset = (self.navigationController!.navigationBar.frame.height + UIApplication.shared.statusBarFrame.height + 10)
-        let graphHeight = (viewBounds.height - yOffset)
-        let graphY = (viewBounds.minY + yOffset)
-        let frame = CGRect(x: viewBounds.minX, y: graphY, width: viewBounds.width, height: graphHeight)
+        let frame = CGRect(x: viewBounds.minX, y: viewBounds.minY, width: viewBounds.width, height: viewBounds.height - self.navigationController!.navigationBar.bounds.size.height - UIApplication.shared.statusBarFrame.height)
         self.renderGraph(withFrame: frame, completion: {
             self.activityIndicatorView.stopAnimating()
         })
+    }
+    
+    override public func viewWillAppear(_ animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.setToolbarHidden(true, animated: animated)
+    }
+    
+    override public func viewWillDisappear(_ animated: Bool)
+    {
+        super.viewWillDisappear(animated)
+        
+        self.navigationController?.setToolbarHidden(false, animated: animated)
     }
     
     internal func renderGraph(withFrame frame: CGRect, completion: @escaping () ->())
@@ -37,6 +48,7 @@ class CostGraphViewController: UIViewController
         DispatchQueue.global(qos: .background).async
         {
             let hostingView = CPTGraphHostingView(frame: frame)
+            hostingView.backgroundColor = self.view.backgroundColor
             
             DispatchQueue.main.sync {
                 self.view.insertSubview(hostingView, belowSubview: self.activityIndicatorView)

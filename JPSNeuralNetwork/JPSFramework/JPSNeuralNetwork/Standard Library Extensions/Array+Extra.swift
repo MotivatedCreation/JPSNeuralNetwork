@@ -8,9 +8,13 @@
 import Foundation
 import GameKit
 
-public extension Array
+extension Array
 {
-    public func shuffled() -> [Element] {
+    func shuffled(using source: GKRandomSource) -> [Element] {
+        return (self as NSArray).shuffled(using: source) as! [Element]
+    }
+    
+    func shuffled() -> [Element] {
         return (self as NSArray).shuffled() as! [Element]
     }
 }

@@ -1,22 +1,27 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="SlT-JG-C9t">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="SlT-JG-C9t">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
         <scene sceneID="vqp-Pp-m2F">
             <objects>
-                <navigationController id="SlT-JG-C9t" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="X5C-sH-hij">
+                <navigationController toolbarHidden="NO" id="SlT-JG-C9t" sceneMemberID="viewController">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="X5C-sH-hij">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" id="SQb-Mb-A8d">
+                        <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="DCH-Uy-AJJ"/>
                     </connections>
@@ -28,17 +33,17 @@
         <!--Training-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="Training" id="BYZ-38-t0r" customClass="TrainingViewController" customModule="JPSNeuralNetwork" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Training" id="BYZ-38-t0r" customClass="TrainingViewController" customModule="Neural_Network" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="9nx-yV-gLR">
-                                <rect key="frame" x="16" y="74" width="343" height="521.5"/>
+                                <rect key="frame" x="16" y="20" width="343" height="471.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error: ???" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PPy-vP-5hh">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
@@ -76,8 +81,28 @@
                                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wF6-MH-kL0">
                                         <rect key="frame" x="0.0" y="219.5" width="343" height="2"/>
                                     </progressView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="StE-MZ-gJU">
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Sjh-do-2ih">
                                         <rect key="frame" x="0.0" y="241.5" width="343" height="30"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Architecture" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zgw-2s-Qy8">
+                                                <rect key="frame" x="0.0" y="0.0" width="94.5" height="30"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="e.g. 2/3/1" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cqj-dB-3zv">
+                                                <rect key="frame" x="104.5" y="0.0" width="238.5" height="30"/>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="BYZ-38-t0r" id="gAk-CC-4WJ"/>
+                                                </connections>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="StE-MZ-gJU">
+                                        <rect key="frame" x="0.0" y="291.5" width="343" height="30"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bias" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3VT-QP-wvV">
                                                 <rect key="frame" x="0.0" y="0.0" width="32.5" height="30"/>
@@ -97,7 +122,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="OyP-6S-MtY">
-                                        <rect key="frame" x="0.0" y="291.5" width="343" height="30"/>
+                                        <rect key="frame" x="0.0" y="341.5" width="343" height="30"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Epochs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gEv-kb-vfV">
                                                 <rect key="frame" x="0.0" y="0.0" width="57" height="30"/>
@@ -117,7 +142,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="37y-c3-aQ9">
-                                        <rect key="frame" x="0.0" y="341.5" width="343" height="30"/>
+                                        <rect key="frame" x="0.0" y="391.5" width="343" height="30"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Momentum" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pD2-Xa-8iz">
                                                 <rect key="frame" x="0.0" y="0.0" width="87.5" height="30"/>
@@ -137,7 +162,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="al7-nw-9Ni">
-                                        <rect key="frame" x="0.0" y="391.5" width="343" height="30"/>
+                                        <rect key="frame" x="0.0" y="441.5" width="343" height="30"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Learning Rate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dQD-9p-Pt6">
                                                 <rect key="frame" x="0.0" y="0.0" width="105.5" height="30"/>
@@ -156,66 +181,6 @@
                                             </textField>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="A04-kE-A3e">
-                                        <rect key="frame" x="0.0" y="441.5" width="343" height="30"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tcs-9v-lg6">
-                                                <rect key="frame" x="0.0" y="0.0" width="107.5" height="30"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                                <state key="normal" title="Train"/>
-                                                <connections>
-                                                    <action selector="beginTraining:" destination="BYZ-38-t0r" eventType="touchUpInside" id="N8e-fZ-1Lr"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jl9-lZ-Wl7">
-                                                <rect key="frame" x="117.5" y="0.0" width="108" height="30"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                                <state key="normal" title="Live Training"/>
-                                                <connections>
-                                                    <segue destination="Qxe-Fh-Qp9" kind="show" identifier="LiveTrainingViewControllerSegue" id="4qX-LR-yGJ"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AUJ-Mf-3mj">
-                                                <rect key="frame" x="235.5" y="0.0" width="107.5" height="30"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                                <state key="normal" title="Cost Graph"/>
-                                                <connections>
-                                                    <segue destination="bDU-sD-qV3" kind="show" identifier="CostGraphViewControllerSegue" id="4kz-5V-mP6"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="gl5-8F-3jS">
-                                        <rect key="frame" x="0.0" y="491.5" width="343" height="30"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Msc-G9-QF6">
-                                                <rect key="frame" x="0.0" y="0.0" width="171.5" height="30"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                                <state key="normal" title="Reset">
-                                                    <color key="titleColor" red="0.90196078430000004" green="0.17254901959999999" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
-                                                <state key="disabled">
-                                                    <color key="titleColor" red="0.7843137255" green="0.7843137255" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="resetTraining:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2dP-aK-70i"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sJ9-xE-wW0">
-                                                <rect key="frame" x="171.5" y="0.0" width="171.5" height="30"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                                <state key="normal" title="Cancel Training">
-                                                    <color key="titleColor" red="0.90196078430000004" green="0.17254901959999999" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
-                                                <state key="disabled">
-                                                    <color key="titleColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="cancelTraining:" destination="BYZ-38-t0r" eventType="touchUpInside" id="R79-Ff-vS2"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -223,47 +188,87 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="9nx-yV-gLR" secondAttribute="trailing" constant="16" id="A8Q-CC-fSQ"/>
                             <constraint firstItem="9nx-yV-gLR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="16" id="X4u-Df-run"/>
-                            <constraint firstItem="9nx-yV-gLR" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="10" id="jLv-dl-l1l"/>
+                            <constraint firstItem="9nx-yV-gLR" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="jLv-dl-l1l"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Training" id="7W4-rq-eXh"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Training" id="7W4-rq-eXh">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="ynh-0R-YWT">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="J99-GZ-Omn">
+                                <rect key="frame" x="16" y="9" width="25" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="database"/>
+                                <connections>
+                                    <action selector="selectTrainingDataset:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Id9-MD-vCf"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="iuL-tX-0zR">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="oml-y1-qeC">
+                                <rect key="frame" x="272" y="7" width="87" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Live Training"/>
+                                <connections>
+                                    <segue destination="Qxe-Fh-Qp9" kind="show" identifier="LiveTrainingViewControllerSegue" id="Pd9-L5-pec"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="architectureTextField" destination="cqj-dB-3zv" id="cYm-J1-NUz"/>
                         <outlet property="biasTextField" destination="puK-zW-UFr" id="fIC-xl-Roe"/>
-                        <outlet property="cancelTrainingButton" destination="sJ9-xE-wW0" id="atV-Sf-fHh"/>
-                        <outlet property="costGraphButton" destination="AUJ-Mf-3mj" id="YcK-YP-cch"/>
                         <outlet property="currentCostLabel" destination="PPy-vP-5hh" id="1IP-xG-XbN"/>
                         <outlet property="currentEpochLabel" destination="6DM-OY-B9I" id="Fnn-Z8-nxE"/>
                         <outlet property="elapsedTimeLabel" destination="yVJ-K9-9wx" id="jpk-Ty-SdI"/>
                         <outlet property="epochsTextField" destination="KKY-ub-re0" id="X06-4Z-MoU"/>
                         <outlet property="learningRateTextField" destination="7XV-MM-tln" id="SCe-tk-Xzl"/>
-                        <outlet property="liveTrainingButton" destination="Jl9-lZ-Wl7" id="7yd-lH-FVf"/>
+                        <outlet property="liveTrainingButton" destination="oml-y1-qeC" id="ieC-bm-VFM"/>
+                        <outlet property="loadTrainingDataButton" destination="J99-GZ-Omn" id="O3i-gc-Z29"/>
                         <outlet property="momentumTextField" destination="sgO-39-Ajg" id="iuT-AJ-Plb"/>
                         <outlet property="overallProgressLabel" destination="9wI-eO-Mkl" id="BC3-vW-AoY"/>
                         <outlet property="overallProgressView" destination="wF6-MH-kL0" id="Lbe-Vd-WQi"/>
                         <outlet property="progressLabel" destination="BPV-bz-GSw" id="1AY-5g-2BY"/>
                         <outlet property="progressView" destination="Twy-4Y-DfM" id="of2-fi-0ZT"/>
-                        <outlet property="resetTrainingButton" destination="Msc-G9-QF6" id="Ycr-7T-A88"/>
-                        <outlet property="trainButton" destination="Tcs-9v-lg6" id="DPK-I2-HNc"/>
+                        <segue destination="bDU-sD-qV3" kind="show" identifier="GraphViewControllerSegue" id="FoA-JK-ddq"/>
+                        <segue destination="ezA-8A-GDz" kind="show" identifier="CustomDataViewControllerSegue" id="VrB-fa-AUz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="66" y="36"/>
         </scene>
-        <!--Cost Graph-->
+        <!--Custom Data View Controller-->
+        <scene sceneID="DcZ-Jd-kKG">
+            <objects>
+                <viewController id="ezA-8A-GDz" customClass="CustomDataViewController" customModule="Neural_Network" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="BNg-Ro-cKs"/>
+                        <viewControllerLayoutGuide type="bottom" id="bXM-lD-rKV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="oc2-xn-i0t">
+                        <rect key="frame" x="0.0" y="64" width="375" height="559"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kdj-A1-9SV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="945" y="-1004"/>
+        </scene>
+        <!--Graph-->
         <scene sceneID="blQ-0O-szB">
             <objects>
-                <viewController storyboardIdentifier="CostGraphViewController" title="Cost Graph" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bDU-sD-qV3" customClass="CostGraphViewController" customModule="JPSNeuralNetwork" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CostGraphViewController" title="Graph" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bDU-sD-qV3" customClass="CostGraphViewController" customModule="Neural_Network" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="QzA-vx-JV9"/>
                         <viewControllerLayoutGuide type="bottom" id="rRu-Oa-GU3"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ZXP-Ik-S7F">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="035-di-V0e">
-                                <rect key="frame" x="177" y="323" width="20" height="20"/>
+                                <rect key="frame" x="177" y="269.5" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -283,17 +288,17 @@
         <!--Live Training-->
         <scene sceneID="0Rf-Bm-x1t">
             <objects>
-                <viewController storyboardIdentifier="LiveTrainingViewController" title="Live Training" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Qxe-Fh-Qp9" customClass="LiveTrainingViewController" customModule="JPSNeuralNetwork" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LiveTrainingViewController" title="Live Training" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Qxe-Fh-Qp9" customClass="LiveTrainingViewController" customModule="Neural_Network" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="EAc-VR-aen"/>
                         <viewControllerLayoutGuide type="bottom" id="pw2-hI-2et"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="UxR-PQ-zpK">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="64" width="375" height="559"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="dBz-gk-aDq">
-                                <rect key="frame" x="20" y="84" width="335" height="563"/>
+                                <rect key="frame" x="20" y="20" width="335" height="519"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Prediction: ???" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ytJ-xd-lsq">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="20"/>
@@ -367,7 +372,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="24" id="ie8-Df-eVr"/>
                                                 </constraints>
-                                                <state key="normal" title="Choose Image"/>
+                                                <state key="normal" title="Take Photo"/>
                                                 <connections>
                                                     <action selector="openCamera:" destination="Qxe-Fh-Qp9" eventType="touchUpInside" id="KI1-Wb-27E"/>
                                                 </connections>
@@ -397,8 +402,8 @@
                                             <action selector="changeColorSpace:" destination="Qxe-Fh-Qp9" eventType="valueChanged" id="68m-Dg-wGU"/>
                                         </connections>
                                     </segmentedControl>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gwg-OH-fd0" customClass="JPSCanvasView" customModule="JPSNeuralNetwork" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="268" width="335" height="295"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gwg-OH-fd0" customClass="JPSCanvasView" customModule="Neural_Network" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="268" width="335" height="251"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                 </subviews>
@@ -425,4 +430,7 @@
             <point key="canvasLocation" x="944.79999999999995" y="349.47526236881561"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="database" width="25" height="25"/>
+    </resources>
 </document>

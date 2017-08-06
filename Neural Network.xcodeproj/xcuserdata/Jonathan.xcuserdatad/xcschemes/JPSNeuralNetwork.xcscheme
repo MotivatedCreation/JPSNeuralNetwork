@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AB6C43FE1E93C84D000DAF9E"
-               BuildableName = "JPSNeuralNetwork.app"
-               BlueprintName = "JPSNeuralNetwork"
-               ReferencedContainer = "container:JPSNeuralNetwork.xcodeproj">
+               BuildableName = "Neural Network.app"
+               BlueprintName = "Neural Network"
+               ReferencedContainer = "container:Neural Network.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AB6C44121E93C84D000DAF9E"
-               BuildableName = "JPSNeuralNetworkTests.xctest"
-               BlueprintName = "JPSNeuralNetworkTests"
-               ReferencedContainer = "container:JPSNeuralNetwork.xcodeproj">
+               BuildableName = "Neural NetworkTests.xctest"
+               BlueprintName = "Neural NetworkTests"
+               ReferencedContainer = "container:Neural Network.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AB6C441D1E93C84D000DAF9E"
-               BuildableName = "JPSNeuralNetworkUITests.xctest"
-               BlueprintName = "JPSNeuralNetworkUITests"
-               ReferencedContainer = "container:JPSNeuralNetwork.xcodeproj">
+               BuildableName = "Neural NetworkUITests.xctest"
+               BlueprintName = "Neural NetworkUITests"
+               ReferencedContainer = "container:Neural Network.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -53,9 +53,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AB6C43FE1E93C84D000DAF9E"
-            BuildableName = "JPSNeuralNetwork.app"
-            BlueprintName = "JPSNeuralNetwork"
-            ReferencedContainer = "container:JPSNeuralNetwork.xcodeproj">
+            BuildableName = "Neural Network.app"
+            BlueprintName = "Neural Network"
+            ReferencedContainer = "container:Neural Network.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -76,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AB6C43FE1E93C84D000DAF9E"
-            BuildableName = "JPSNeuralNetwork.app"
-            BlueprintName = "JPSNeuralNetwork"
-            ReferencedContainer = "container:JPSNeuralNetwork.xcodeproj">
+            BuildableName = "Neural Network.app"
+            BlueprintName = "Neural Network"
+            ReferencedContainer = "container:Neural Network.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -95,9 +95,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "AB6C43FE1E93C84D000DAF9E"
-            BuildableName = "JPSNeuralNetwork.app"
-            BlueprintName = "JPSNeuralNetwork"
-            ReferencedContainer = "container:JPSNeuralNetwork.xcodeproj">
+            BuildableName = "Neural Network.app"
+            BlueprintName = "Neural Network"
+            ReferencedContainer = "container:Neural Network.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

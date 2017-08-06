@@ -18,6 +18,7 @@
 		AB249A101EC517BE001F831F /* UIImage+PixelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB249A0F1EC517BE001F831F /* UIImage+PixelData.swift */; };
 		AB249A131EC517F8001F831F /* TimeInterval+Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB249A121EC517F8001F831F /* TimeInterval+Formatting.swift */; };
 		AB249A171EC7E01C001F831F /* forestfires.csv in Resources */ = {isa = PBXBuildFile; fileRef = AB249A161EC7E01C001F831F /* forestfires.csv */; };
+		AB2F52691F365F79008AC153 /* CustomDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2F52681F365F79008AC153 /* CustomDataViewController.swift */; };
 		AB64044E1EC4BC8E00FCA969 /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB64044D1EC4BC8E00FCA969 /* libCorePlot-CocoaTouch.a */; };
 		AB6404501EC4BDB300FCA969 /* CorePlot.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AB64044B1EC4BC6600FCA969 /* CorePlot.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		AB6C44031E93C84D000DAF9E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB6C44021E93C84D000DAF9E /* AppDelegate.swift */; };
@@ -88,19 +89,20 @@
 		AB249A0F1EC517BE001F831F /* UIImage+PixelData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+PixelData.swift"; sourceTree = "<group>"; };
 		AB249A121EC517F8001F831F /* TimeInterval+Formatting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TimeInterval+Formatting.swift"; sourceTree = "<group>"; };
 		AB249A161EC7E01C001F831F /* forestfires.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = forestfires.csv; sourceTree = "<group>"; };
+		AB2F52681F365F79008AC153 /* CustomDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomDataViewController.swift; sourceTree = "<group>"; };
 		AB64044B1EC4BC6600FCA969 /* CorePlot.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CorePlot.framework; sourceTree = "<group>"; };
 		AB64044D1EC4BC8E00FCA969 /* libCorePlot-CocoaTouch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libCorePlot-CocoaTouch.a"; sourceTree = "<group>"; };
-		AB6C43FF1E93C84D000DAF9E /* JPSNeuralNetwork.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JPSNeuralNetwork.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB6C43FF1E93C84D000DAF9E /* Neural Network.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Neural Network.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB6C44021E93C84D000DAF9E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AB6C44041E93C84D000DAF9E /* TrainingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingViewController.swift; sourceTree = "<group>"; };
 		AB6C44071E93C84D000DAF9E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AB6C44091E93C84D000DAF9E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AB6C440C1E93C84D000DAF9E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AB6C440E1E93C84D000DAF9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AB6C44131E93C84D000DAF9E /* JPSNeuralNetworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JPSNeuralNetworkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB6C44131E93C84D000DAF9E /* Neural NetworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Neural NetworkTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB6C44171E93C84D000DAF9E /* JPSNeuralNetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JPSNeuralNetworkTests.swift; sourceTree = "<group>"; };
 		AB6C44191E93C84D000DAF9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AB6C441E1E93C84D000DAF9E /* JPSNeuralNetworkUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JPSNeuralNetworkUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB6C441E1E93C84D000DAF9E /* Neural NetworkUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Neural NetworkUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB6C44221E93C84D000DAF9E /* JPSNeuralNetworkUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JPSNeuralNetworkUITests.swift; sourceTree = "<group>"; };
 		AB6C44241E93C84D000DAF9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AB6C44301E93C872000DAF9E /* JPSNeuralNetworkNeuron.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JPSNeuralNetworkNeuron.swift; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 			isa = PBXGroup;
 			children = (
 				ABE05D7A1ED4CDC700A7EC53 /* JPSCanvasView.swift */,
+				ABE8FBE11F3625D10093A79A /* Standard Library Extensions */,
 				AB6C44321E93C8AA000DAF9E /* JPSNeuralNetwork */,
 				AB249A051EC4DAD6001F831F /* JPSBinaryDataLoader */,
 			);
@@ -305,8 +308,9 @@
 			isa = PBXGroup;
 			children = (
 				AB6C44041E93C84D000DAF9E /* TrainingViewController.swift */,
-				AB249A0B1EC51658001F831F /* CostGraphViewController.swift */,
 				AB249A0D1EC51663001F831F /* LiveTrainingViewController.swift */,
+				AB249A0B1EC51658001F831F /* CostGraphViewController.swift */,
+				AB2F52681F365F79008AC153 /* CustomDataViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -325,9 +329,9 @@
 		AB6C44001E93C84D000DAF9E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AB6C43FF1E93C84D000DAF9E /* JPSNeuralNetwork.app */,
-				AB6C44131E93C84D000DAF9E /* JPSNeuralNetworkTests.xctest */,
-				AB6C441E1E93C84D000DAF9E /* JPSNeuralNetworkUITests.xctest */,
+				AB6C43FF1E93C84D000DAF9E /* Neural Network.app */,
+				AB6C44131E93C84D000DAF9E /* Neural NetworkTests.xctest */,
+				AB6C441E1E93C84D000DAF9E /* Neural NetworkUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -375,7 +379,6 @@
 		AB6C44321E93C8AA000DAF9E /* JPSNeuralNetwork */ = {
 			isa = PBXGroup;
 			children = (
-				ABE8FBE11F3625D10093A79A /* Standard Library Extensions */,
 				AB6C44351E93C8C5000DAF9E /* JPSNeuralNetwork.swift */,
 				AB6C44331E93C8B9000DAF9E /* JPSNeuralNetworkLayer.swift */,
 				AB6C44301E93C872000DAF9E /* JPSNeuralNetworkNeuron.swift */,
@@ -404,7 +407,8 @@
 			children = (
 				ABE8FBE21F3625EE0093A79A /* Array+Extra.swift */,
 			);
-			path = "Standard Library Extensions";
+			name = "Standard Library Extensions";
+			path = "JPSNeuralNetwork/Standard Library Extensions";
 			sourceTree = "<group>";
 		};
 		ABF025E31EC4B8D200B0302E /* Frameworks */ = {
@@ -508,9 +512,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		AB6C43FE1E93C84D000DAF9E /* JPSNeuralNetwork */ = {
+		AB6C43FE1E93C84D000DAF9E /* Neural Network */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AB6C44271E93C84D000DAF9E /* Build configuration list for PBXNativeTarget "JPSNeuralNetwork" */;
+			buildConfigurationList = AB6C44271E93C84D000DAF9E /* Build configuration list for PBXNativeTarget "Neural Network" */;
 			buildPhases = (
 				AB6C43FB1E93C84D000DAF9E /* Sources */,
 				AB6C43FC1E93C84D000DAF9E /* Frameworks */,
@@ -521,14 +525,14 @@
 			);
 			dependencies = (
 			);
-			name = JPSNeuralNetwork;
+			name = "Neural Network";
 			productName = "Convolutional-Neural-Network";
-			productReference = AB6C43FF1E93C84D000DAF9E /* JPSNeuralNetwork.app */;
+			productReference = AB6C43FF1E93C84D000DAF9E /* Neural Network.app */;
 			productType = "com.apple.product-type.application";
 		};
-		AB6C44121E93C84D000DAF9E /* JPSNeuralNetworkTests */ = {
+		AB6C44121E93C84D000DAF9E /* Neural NetworkTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AB6C442A1E93C84D000DAF9E /* Build configuration list for PBXNativeTarget "JPSNeuralNetworkTests" */;
+			buildConfigurationList = AB6C442A1E93C84D000DAF9E /* Build configuration list for PBXNativeTarget "Neural NetworkTests" */;
 			buildPhases = (
 				AB6C440F1E93C84D000DAF9E /* Sources */,
 				AB6C44101E93C84D000DAF9E /* Frameworks */,
@@ -539,14 +543,14 @@
 			dependencies = (
 				AB6C44151E93C84D000DAF9E /* PBXTargetDependency */,
 			);
-			name = JPSNeuralNetworkTests;
+			name = "Neural NetworkTests";
 			productName = "Convolutional-Neural-NetworkTests";
-			productReference = AB6C44131E93C84D000DAF9E /* JPSNeuralNetworkTests.xctest */;
+			productReference = AB6C44131E93C84D000DAF9E /* Neural NetworkTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		AB6C441D1E93C84D000DAF9E /* JPSNeuralNetworkUITests */ = {
+		AB6C441D1E93C84D000DAF9E /* Neural NetworkUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AB6C442D1E93C84D000DAF9E /* Build configuration list for PBXNativeTarget "JPSNeuralNetworkUITests" */;
+			buildConfigurationList = AB6C442D1E93C84D000DAF9E /* Build configuration list for PBXNativeTarget "Neural NetworkUITests" */;
 			buildPhases = (
 				AB6C441A1E93C84D000DAF9E /* Sources */,
 				AB6C441B1E93C84D000DAF9E /* Frameworks */,
@@ -557,9 +561,9 @@
 			dependencies = (
 				AB6C44201E93C84D000DAF9E /* PBXTargetDependency */,
 			);
-			name = JPSNeuralNetworkUITests;
+			name = "Neural NetworkUITests";
 			productName = "Convolutional-Neural-NetworkUITests";
-			productReference = AB6C441E1E93C84D000DAF9E /* JPSNeuralNetworkUITests.xctest */;
+			productReference = AB6C441E1E93C84D000DAF9E /* Neural NetworkUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -591,7 +595,7 @@
 					};
 				};
 			};
-			buildConfigurationList = AB6C43FA1E93C84D000DAF9E /* Build configuration list for PBXProject "JPSNeuralNetwork" */;
+			buildConfigurationList = AB6C43FA1E93C84D000DAF9E /* Build configuration list for PBXProject "Neural Network" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -605,9 +609,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AB6C43FE1E93C84D000DAF9E /* JPSNeuralNetwork */,
-				AB6C44121E93C84D000DAF9E /* JPSNeuralNetworkTests */,
-				AB6C441D1E93C84D000DAF9E /* JPSNeuralNetworkUITests */,
+				AB6C43FE1E93C84D000DAF9E /* Neural Network */,
+				AB6C44121E93C84D000DAF9E /* Neural NetworkTests */,
+				AB6C441D1E93C84D000DAF9E /* Neural NetworkUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -649,6 +653,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AB2F52691F365F79008AC153 /* CustomDataViewController.swift in Sources */,
 				AB249A0E1EC51663001F831F /* LiveTrainingViewController.swift in Sources */,
 				AB249A081EC4DBDA001F831F /* JPSMNISTDataLoader.swift in Sources */,
 				ABE05D7B1ED4CDC700A7EC53 /* JPSCanvasView.swift in Sources */,
@@ -691,12 +696,12 @@
 /* Begin PBXTargetDependency section */
 		AB6C44151E93C84D000DAF9E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = AB6C43FE1E93C84D000DAF9E /* JPSNeuralNetwork */;
+			target = AB6C43FE1E93C84D000DAF9E /* Neural Network */;
 			targetProxy = AB6C44141E93C84D000DAF9E /* PBXContainerItemProxy */;
 		};
 		AB6C44201E93C84D000DAF9E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = AB6C43FE1E93C84D000DAF9E /* JPSNeuralNetwork */;
+			target = AB6C43FE1E93C84D000DAF9E /* Neural Network */;
 			targetProxy = AB6C441F1E93C84D000DAF9E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -761,7 +766,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -805,7 +810,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -875,7 +880,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Jonathan-Sullivan.JPSNeuralNetworkTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JPSNeuralNetwork.app/JPSNeuralNetwork";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Neural Network.app/Neural Network";
 			};
 			name = Debug;
 		};
@@ -890,7 +895,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Jonathan-Sullivan.JPSNeuralNetworkTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JPSNeuralNetwork.app/JPSNeuralNetwork";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Neural Network.app/Neural Network";
 			};
 			name = Release;
 		};
@@ -925,7 +930,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AB6C43FA1E93C84D000DAF9E /* Build configuration list for PBXProject "JPSNeuralNetwork" */ = {
+		AB6C43FA1E93C84D000DAF9E /* Build configuration list for PBXProject "Neural Network" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AB6C44251E93C84D000DAF9E /* Debug */,
@@ -934,7 +939,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AB6C44271E93C84D000DAF9E /* Build configuration list for PBXNativeTarget "JPSNeuralNetwork" */ = {
+		AB6C44271E93C84D000DAF9E /* Build configuration list for PBXNativeTarget "Neural Network" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AB6C44281E93C84D000DAF9E /* Debug */,
@@ -943,7 +948,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AB6C442A1E93C84D000DAF9E /* Build configuration list for PBXNativeTarget "JPSNeuralNetworkTests" */ = {
+		AB6C442A1E93C84D000DAF9E /* Build configuration list for PBXNativeTarget "Neural NetworkTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AB6C442B1E93C84D000DAF9E /* Debug */,
@@ -952,7 +957,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AB6C442D1E93C84D000DAF9E /* Build configuration list for PBXNativeTarget "JPSNeuralNetworkUITests" */ = {
+		AB6C442D1E93C84D000DAF9E /* Build configuration list for PBXNativeTarget "Neural NetworkUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AB6C442E1E93C84D000DAF9E /* Debug */,

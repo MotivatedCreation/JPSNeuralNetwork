@@ -56,24 +56,25 @@ public class LiveTrainingViewController: UIViewController
     @IBOutlet weak internal var numberOfOutputsTextField: UITextField!
     @IBOutlet weak internal var correctPredicationTextField: UITextField!
     
-    public var weights: Matrix?
-    public var weights2: Matrix?
-    public var architecture: [Int]?
     public var momentum: Scalar = 0.1
     public var learningRate: Scalar = 0.9
-    public var errorFunction: JPSNeuralNetworErrorFunction?
-    public var activationFunctions: [JPSNeuralNetworkActivationFunction]?
+    public var architecture = [784, 20, 10]
+    public var recreationWeights: Matrix!
+    public var classificationWeights: Matrix!
+    public var errorFunction = JPSNeuralNetworErrorFunction.meanSquared
+    public var activationFunctions: [JPSNeuralNetworkActivationFunction] = [.sigmoid, .sigmoid]
+    
+    fileprivate let resizedImageSize = CGSize(width: 28, height: 28)
 
-    internal var imagePixels: Vector?
-    internal var resizedImage: UIImage?
-    internal var currentError: Float = 0
-    internal var previousError: Float = 0
-    internal var predictionInverse: Vector?
-    internal var animationPixels = Matrix()
-    internal var colorSpace = ColorSpace.grayScale
-    internal var recreationNetwork: JPSNeuralNetwork?
-    internal var classificationNetwork: JPSNeuralNetwork?
-    internal let resizedImageSize = CGSize(width: 28, height: 28)
+    fileprivate var imagePixels: Vector?
+    fileprivate var resizedImage: UIImage?
+    fileprivate var currentError: Float = 0
+    fileprivate var previousError: Float = 0
+    fileprivate var predictionInverse: Vector?
+    fileprivate var animationPixels = Matrix()
+    fileprivate var colorSpace = ColorSpace.grayScale
+    fileprivate var recreationNetwork: JPSNeuralNetwork?
+    fileprivate var classificationNetwork: JPSNeuralNetwork?
     
     private var prediction: Vector?
     
@@ -88,7 +89,21 @@ public class LiveTrainingViewController: UIViewController
         
         self.correctPredicationTextField.delegate = self
         
-        self.buildNetworks(withArchitecture: self.architecture!)
+        self.buildNetworks(withArchitecture: self.architecture)
+    }
+    
+    override public func viewWillAppear(_ animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.setToolbarHidden(true, animated: animated)
+    }
+    
+    override public func viewWillDisappear(_ animated: Bool)
+    {
+        super.viewWillDisappear(animated)
+        
+        self.navigationController?.setToolbarHidden(false, animated: animated)
     }
     
     deinit { print("(\((#file as NSString).lastPathComponent) \(#function))") }
@@ -115,8 +130,17 @@ public class LiveTrainingViewController: UIViewController
     
     internal func feedPixelsForward(inputs: Vector)
     {
-        self.prediction = self.classificationNetwork!.feedForward(inputs: inputs)
-        self.predictionInverse = self.recreationNetwork!.feedForward(inputs: self.prediction!)
+        self.prediction = self.classificationNetwork!.feedForward(architecture: self.architecture, activationFunctions: self.activationFunctions, inputs: inputs)
+        self.predictionInverse = self.recreationNetwork!.feedForward(architecture: self.architecture.reversed(), activationFunctions: self.activationFunctions.reversed(), inputs: self.prediction!)
+    }
+    
+    private func predictClassification() -> Scalar
+    {
+        self.feedPixelsForward(inputs: self.imagePixels!)
+        
+        let max = self.prediction!.max()!
+        let predictedDigit = self.prediction!.index(of: max)!
+        return Scalar(predictedDigit)
     }
     
     internal func predict(image: UIImage)
@@ -134,7 +158,7 @@ public class LiveTrainingViewController: UIViewController
             return nil
         }
         
-        var architecture = self.architecture!
+        var architecture = self.architecture
         architecture[architecture.count - 1] = numberOfOutputs
         
         return architecture
@@ -175,7 +199,7 @@ public class LiveTrainingViewController: UIViewController
             return nil
         }
         
-        var targetOutputs = Vector(repeating: 0, count: self.architecture!.last!)
+        var targetOutputs = Vector(repeating: 0, count: self.architecture.last!)
         targetOutputs[correctPredication] = 1
         
         return targetOutputs
@@ -188,10 +212,17 @@ public class LiveTrainingViewController: UIViewController
             do
             {
                 // Train the network using the raw image pixels and the correct prediction.
-                try self.recreationNetwork!.train(epochs: epochs, errorFunction: self.errorFunction!, learningRate: self.learningRate, momentum: self.momentum, trainingInputs: targetOutputs, targetOutputs: inputs)
-                try self.classificationNetwork!.train(epochs: epochs, errorFunction: self.errorFunction!, learningRate: self.learningRate, momentum: self.momentum, trainingInputs: inputs, targetOutputs: targetOutputs)
+                try self.recreationNetwork!.train(epochs: epochs, architecture: self.architecture.reversed(), activationFunctions: self.activationFunctions.reversed(), errorFunction: self.errorFunction, learningRate: self.learningRate, momentum: self.momentum, trainingInputs: targetOutputs, targetOutputs: inputs)
+                try self.classificationNetwork!.train(epochs: epochs, architecture: self.architecture, activationFunctions: self.activationFunctions, errorFunction: self.errorFunction, learningRate: self.learningRate, momentum: self.momentum, trainingInputs: inputs, targetOutputs: targetOutputs)
             }
-            catch { print(error) }
+            catch {
+                let alertController = UIAlertController(title: (error as NSError).domain, message: (error as NSError).localizedFailureReason, preferredStyle: .alert)
+                
+                let okayAction = UIAlertAction(title: "Okay", style: .cancel)
+                alertController.addAction(okayAction)
+                
+                self.present(alertController, animated: true, completion: nil)
+            }
         }
     }
     
@@ -203,40 +234,41 @@ public class LiveTrainingViewController: UIViewController
         cameraUI.sourceType = .camera
         cameraUI.allowsEditing = false
         cameraUI.delegate = delegate
-        
-        guard let availableMediaTypes = UIImagePickerController.availableMediaTypes(for: .camera) else { return }
-        cameraUI.mediaTypes = availableMediaTypes
-        
         viewController.present(cameraUI, animated: true, completion: nil)
     }
     
     private func buildNetworks(withArchitecture architecture: [Int])
     {
-        self.classificationNetwork = JPSNeuralNetwork(architecture: architecture, activationFunctions: self.activationFunctions!)
+        self.classificationNetwork = JPSNeuralNetwork()
         self.classificationNetwork!.delegate = self
         self.classificationNetwork!.bias = 1
-        self.classificationNetwork!.weights = self.weights
+        self.classificationNetwork!.weights = self.classificationWeights
         
-        self.recreationNetwork = JPSNeuralNetwork(architecture: architecture.reversed(), activationFunctions: self.activationFunctions!.reversed())
+        self.recreationNetwork = JPSNeuralNetwork()
         self.recreationNetwork!.bias = 1
-        self.recreationNetwork!.weights = self.weights2
-    }
-    
-    private func predictClassification() -> Scalar
-    {
-        self.feedPixelsForward(inputs: self.imagePixels!)
-        
-        let max = self.prediction!.max()!
-        let predictedDigit = self.prediction!.index(of: max)!
-        return Scalar(predictedDigit)
+        self.recreationNetwork!.weights = self.recreationWeights
     }
     
     @IBAction func backpropagate(_ sender: Any)
     {
-        guard let targetOutputs = self.targetOutputsForCorrectPredication() else { return }
-        
-        self.predict(image: self.resizedImage!)
-        self.trainNeuralNetwork(epochs: 1, inputs: [self.imagePixels!], targetOutputs: [targetOutputs])
+        if let targetOutputs = self.targetOutputsForCorrectPredication()
+        {
+            self.trainNeuralNetwork(epochs: 1, inputs: [self.imagePixels!], targetOutputs: [targetOutputs])
+            
+            self.predict(image: self.resizedImage!)
+            
+            let pixels = self.predictionInverse!.map({
+                return UInt8($0 * Scalar(UInt8.max))
+            })
+            
+            self.printNumber(rowSize: Int(self.resizedImageSize.width), pixels: pixels)
+        }
+        else {
+            self.currentError = 0
+            self.previousError = 0
+            self.errorLabel.text = "Error: ???"
+            self.errorLabel.textColor = UIColor.black
+        }
     }
     
     @IBAction func openCamera(_ sender: Any) {
@@ -249,9 +281,11 @@ public class LiveTrainingViewController: UIViewController
         
         let numberOfComponents = CGFloat(self.colorSpace == .grayScale ? 1 : 4)
         
-        var architecture = self.architecture!
+        var architecture = self.architecture
         architecture[0] = Int(self.resizedImageSize.width * self.resizedImageSize.height * numberOfComponents)
-        self.buildNetworks(withArchitecture: architecture)
+        self.architecture = architecture
+        
+        self.buildNetworks(withArchitecture: self.architecture)
     }
 }
 
@@ -266,23 +300,16 @@ extension LiveTrainingViewController: JPSCanvasViewDelegate
             canvasView.clear()
             
             self.resizedImage = image
-            self.predict(image: image)
+            self.predict(image: self.resizedImage!)
             
-            let pixels = self.predictionInverse!.map({
-                return UInt8($0 * Scalar(UInt8.max))
+            let average = UInt8(self.predictionInverse!.reduce(0, +) / Scalar(self.predictionInverse!.count) * Scalar(UInt8.max))
+            let pixels = self.predictionInverse!.map({ value -> UInt8 in
+                
+                let pixel = UInt8(value * Scalar(UInt8.max))
+                return pixel > average && UInt(Double(pixel) * 2) < UInt(UInt8.max) ? UInt8(Double(pixel) * 2) : pixel
             })
             
             self.printNumber(rowSize: Int(self.resizedImageSize.width), pixels: pixels)
-            
-            if let targetOutputs = self.targetOutputsForCorrectPredication() {
-                self.trainNeuralNetwork(epochs: 1, inputs: [self.imagePixels!], targetOutputs: [targetOutputs])
-            }
-            else {
-                self.currentError = 0
-                self.previousError = 0
-                self.errorLabel.text = "Error: ???"
-                self.errorLabel.textColor = UIColor.black
-            }
         }
     }
 }
@@ -364,16 +391,6 @@ extension LiveTrainingViewController: UIImagePickerControllerDelegate
             })
             
             self.printNumber(rowSize: Int(self.resizedImageSize.width), pixels: pixels)
-            
-            if let targetOutputs = self.targetOutputsForCorrectPredication() {
-                self.trainNeuralNetwork(epochs: 1, inputs: [self.imagePixels!], targetOutputs: [targetOutputs])
-            }
-            else {
-                self.currentError = 0
-                self.previousError = 0
-                self.errorLabel.text = "Error: ???"
-                self.errorLabel.textColor = UIColor.black
-            }
         }
     }
 }

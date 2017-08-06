@@ -12,23 +12,27 @@ public typealias MNISTImage = [MNISTPixel]
 
 public class JPSMNISTDataLoader: JPSBinaryDataLoader
 {
-    private let labelSize = 1
-    private let labelOffset = 8
-    private let imageSize: Int!
-    private let imageOffset = 16
     private let numberOfRows = 28
     private let numberOfColumns = 28
-    private let numberOfItemsOffset = 4
+    
+    fileprivate let labelSize = 1
+    fileprivate let labelOffset = 8
+    fileprivate let imageSize: Int!
+    fileprivate let imageOffset = 16
+    fileprivate let numberOfItemsOffset = 4
     
     public override init() {
         self.imageSize = (numberOfRows * numberOfColumns)
     }
-    
+}
+
+extension JPSMNISTDataLoader
+{
     public class func normalizePixel(_ value: UInt8) -> Float {
         return Float(Float(value) / 255.0)
     }
     
-    private class func pixels(forImageData imageData: NSData) -> MNISTImage
+    fileprivate class func pixels(forImageData imageData: NSData) -> MNISTImage
     {
         var mnistImage = MNISTImage()
         
@@ -45,19 +49,21 @@ public class JPSMNISTDataLoader: JPSBinaryDataLoader
         
         return mnistImage
     }
-    
-    private class func loadData(filePrefix: String, numberOfItemsOffset: Int, labelOffset: Int, labelSize: Int, imageOffset: Int, imageSize: Int) throws -> (labels: [MNISTLabel], images: [MNISTImage])
+}
+
+extension JPSMNISTDataLoader
+{
+    fileprivate class func loadData(filePrefix: String, numberOfItemsOffset: Int, labelOffset: Int, labelSize: Int, imageOffset: Int, imageSize: Int) throws -> (labels: [MNISTLabel], images: [MNISTImage])
     {
         let bufferSize = 16384
         
         let labelData = (try JPSBinaryDataLoader.data(forResource: "\(filePrefix)-labels", ofType: "idx1-ubyte", bufferSize: bufferSize) as NSData)
-        
         let imageData = (try JPSBinaryDataLoader.data(forResource: "\(filePrefix)-images", ofType: "idx3-ubyte", bufferSize: bufferSize) as NSData)
         
         var count: UInt32 = 0
         let dataRange = NSMakeRange(numberOfItemsOffset, labelOffset)
-        
         labelData.getBytes(&count, range: dataRange)
+        
         let numberOfLabels = UInt32(bigEndian: count)
         
         var labels = [MNISTLabel]()
@@ -83,17 +89,23 @@ public class JPSMNISTDataLoader: JPSBinaryDataLoader
         
         return (labels, images)
     }
-    
+}
+
+extension JPSMNISTDataLoader
+{
     private class func loadTestingData(numberOfItemsOffset: Int, labelOffset: Int, labelSize: Int, imageOffset: Int, imageSize: Int) throws -> (labels: [MNISTLabel], images: [MNISTImage]) {
-        return (try JPSMNISTDataLoader.loadData(filePrefix: "t10k", numberOfItemsOffset: numberOfItemsOffset, labelOffset: labelOffset, labelSize: labelSize, imageOffset: imageOffset, imageSize: imageSize))
-    }
-    
-    private class func loadTrainingData(numberOfItemsOffset: Int, labelOffset: Int, labelSize: Int, imageOffset: Int, imageSize: Int) throws -> (labels: [MNISTLabel], images: [MNISTImage]) {
-        return (try JPSMNISTDataLoader.loadData(filePrefix: "train", numberOfItemsOffset: numberOfItemsOffset, labelOffset: labelOffset, labelSize: labelSize, imageOffset: imageOffset, imageSize: imageSize))
+        return try JPSMNISTDataLoader.loadData(filePrefix: "t10k", numberOfItemsOffset: numberOfItemsOffset, labelOffset: labelOffset, labelSize: labelSize, imageOffset: imageOffset, imageSize: imageSize)
     }
     
     public func loadTestingData() throws -> (labels: [MNISTLabel], images: [MNISTImage]) {
         return try JPSMNISTDataLoader.loadTestingData(numberOfItemsOffset: self.numberOfItemsOffset, labelOffset: self.labelOffset, labelSize: self.labelSize, imageOffset: self.imageOffset, imageSize: self.imageSize)
+    }
+}
+
+extension JPSMNISTDataLoader
+{
+    private class func loadTrainingData(numberOfItemsOffset: Int, labelOffset: Int, labelSize: Int, imageOffset: Int, imageSize: Int) throws -> (labels: [MNISTLabel], images: [MNISTImage]) {
+        return try JPSMNISTDataLoader.loadData(filePrefix: "train", numberOfItemsOffset: numberOfItemsOffset, labelOffset: labelOffset, labelSize: labelSize, imageOffset: imageOffset, imageSize: imageSize)
     }
     
     public func loadTrainingData() throws -> (labels: [MNISTLabel], images: [MNISTImage]) {
